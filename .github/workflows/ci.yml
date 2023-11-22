@@ -56,7 +56,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - uses: snok/install-poetry@v1.3.4
       - name: Install Dependencies
-        run: poetry install -E testing
+        run: poetry add $( cat requirements.txt )
+        shell: bash
+      - name: Install Poetry environment
+        run: poetry install
         shell: bash
       - name: Test with Pytest
         run: poetry run pytest --cov-report=xml
