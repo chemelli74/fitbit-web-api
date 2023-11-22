@@ -14,7 +14,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 packages = [
-    { include = "fitbit_web_api", from = "src" },
+    { include = "swagger_client" },
 ]
 
 [tool.poetry.urls]
