@@ -6,3 +6,5 @@ java -jar ./swagger-tools/swagger-codegen-cli.jar generate \
    -o . \
    -DpackageName=fitbit_web_api \
    --library asyncio
+
+poetry add $( cat requirements.txt | awk '{print $1;}' )
