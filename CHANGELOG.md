@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.1 (2023-12-21)
+
+### Unknown
+
+### Fix
+
+- Ci package distributons ([`11b26d2`](https://github.com/chemelli74/fitbit-web-api/commit/11b26d2473dd507e9a278360df310aeecd9bafc5))
+
+
 ## v0.1.0 (2023-12-21)
 
 ### Unknown
