@@ -106,10 +106,10 @@ class AuthorizationApi(object):
 
         body_params = None
         # HTTP header `Content-Type`
-        header_params[
-            "Content-Type"
-        ] = self.api_client.select_header_content_type(  # noqa: E501
-            ["application/x-www-form-urlencoded"]
+        header_params["Content-Type"] = (
+            self.api_client.select_header_content_type(  # noqa: E501
+                ["application/x-www-form-urlencoded"]
+            )
         )  # noqa: E501
 
         # Authentication setting
@@ -348,10 +348,10 @@ class AuthorizationApi(object):
 
         body_params = None
         # HTTP header `Content-Type`
-        header_params[
-            "Content-Type"
-        ] = self.api_client.select_header_content_type(  # noqa: E501
-            ["application/x-www-form-urlencoded"]
+        header_params["Content-Type"] = (
+            self.api_client.select_header_content_type(  # noqa: E501
+                ["application/x-www-form-urlencoded"]
+            )
         )  # noqa: E501
 
         # Authentication setting

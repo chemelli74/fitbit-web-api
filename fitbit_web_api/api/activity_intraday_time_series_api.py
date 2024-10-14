@@ -327,16 +327,16 @@ class ActivityIntradayTimeSeriesApi(object):
                 **kwargs
             )  # noqa: E501
         else:
-            (
-                data
-            ) = self.get_activities_resource_by_date_range_time_series_intraday_with_http_info(
-                _resource_path,
-                _date,
-                end_date,
-                detail_level,
-                start_time,
-                end_time,
-                **kwargs
+            (data) = (
+                self.get_activities_resource_by_date_range_time_series_intraday_with_http_info(
+                    _resource_path,
+                    _date,
+                    end_date,
+                    detail_level,
+                    start_time,
+                    end_time,
+                    **kwargs
+                )
             )  # noqa: E501
             return data
 
@@ -496,10 +496,10 @@ class ActivityIntradayTimeSeriesApi(object):
                 _resource_path, _date, detail_level, start_time, end_time, **kwargs
             )  # noqa: E501
         else:
-            (
-                data
-            ) = self.get_activities_resource_by_date_time_series_intraday_with_http_info(
-                _resource_path, _date, detail_level, start_time, end_time, **kwargs
+            (data) = (
+                self.get_activities_resource_by_date_time_series_intraday_with_http_info(
+                    _resource_path, _date, detail_level, start_time, end_time, **kwargs
+                )
             )  # noqa: E501
             return data
 
