@@ -14,7 +14,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 packages = [
-    { include = "fitbit_web_api", from = "src" },
+    { include = "fitbit_web_api" },
 ]
 
 [tool.poetry.urls]
@@ -37,7 +37,7 @@ pytest-cov = ">=4.1,<6.0"
 [tool.semantic_release]
 version_toml = ["pyproject.toml:tool.poetry.version"]
 version_variables = [
-    "src/fitbit_web_api/__init__.py:__version__",
+    "fitbit_web_api/__init__.py:__version__",
 ]
 build_command = "pip install poetry && poetry build"
 
@@ -59,7 +59,7 @@ prerelease = true
 
 [tool.pytest.ini_options]
 addopts = "-v -Wdefault --cov=fitbit_web_api --cov-report=term-missing:skip-covered"
-pythonpath = ["src"]
+pythonpath = ["."]
 
 [tool.coverage.run]
 branch = true
@@ -117,7 +117,7 @@ check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true
 disallow_untyped_defs = true
-mypy_path = "src/"
+mypy_path = "./"
 no_implicit_optional = true
 show_error_codes = true
 warn_unreachable = true
