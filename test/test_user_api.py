@@ -75,7 +75,7 @@ def api_client(
         yield fitbit_web_api.UserApi(fitbit_web_api.ApiClient())
 
 
-async def test_get_profile_async_req(user_api: fitbit_web_api.UserApi) -> None:
+async def test_get_profile_async_true(user_api: fitbit_web_api.UserApi) -> None:
     """Test case for get_profile as an async request."""
 
     result = user_api.get_profile(async_req=True)
@@ -83,7 +83,13 @@ async def test_get_profile_async_req(user_api: fitbit_web_api.UserApi) -> None:
     assert "encodedId" in profile
 
 
-async def test_get_profile(user_api: fitbit_web_api.UserApi) -> None:
+async def test_get_profile_async_false(user_api: fitbit_web_api.UserApi) -> None:
     """Test case for get_profile."""
     profile = await user_api.get_profile(async_req=False)
+    assert "encodedId" in profile
+
+
+async def test_get_profile_async_no_arg(user_api: fitbit_web_api.UserApi) -> None:
+    """Test case for get_profile."""
+    profile = await user_api.get_profile()
     assert "encodedId" in profile
