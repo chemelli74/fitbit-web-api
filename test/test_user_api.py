@@ -3,7 +3,7 @@
 """
     Fitbit Web API Explorer
 
-    Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.  # noqa: E501
+Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.  # noqa: E501
 
     OpenAPI spec version: 1
 
@@ -12,43 +12,78 @@
 
 from __future__ import absolute_import
 
-import unittest
+from unittest.mock import patch
+from collections.abc import Generator, AsyncGenerator
+from typing import Any
+from contextlib import asynccontextmanager
+from unittest.mock import AsyncMock
+
+import aiohttp
+import pytest
+import json
 
 import fitbit_web_api
 from fitbit_web_api.api.user_api import UserApi  # noqa: E501
 from fitbit_web_api.rest import ApiException
 
-
-class TestUserApi(unittest.TestCase):
-    """UserApi unit test stubs"""
-
-    def setUp(self):
-        self.api = UserApi()  # noqa: E501
-
-    def tearDown(self):
-        pass
-
-    def test_get_badges(self):
-        """Test case for get_badges
-
-        Get Badges  # noqa: E501
-        """
-        pass
-
-    def test_get_profile(self):
-        """Test case for get_profile
-
-        Get Profile  # noqa: E501
-        """
-        pass
-
-    def test_update_profile(self):
-        """Test case for update_profile
-
-        Update Profile  # noqa: E501
-        """
-        pass
+PROFILE_DATA = {
+    "user": {
+        "encodedId": "some-profile-id",
+        "locale": "en_US",
+        "fullName": "Full name",
+        "displayName": "Display name",
+        "displayNameSetting": "name",
+        "firstName": "First",
+        "lastName": "Last",
+    }
+}
 
 
-if __name__ == "__main__":
-    unittest.main()
+@asynccontextmanager
+async def handle_request(
+    method: str, url: str, **kwargs
+) -> AsyncGenerator[aiohttp.ClientResponse, None]:
+    """Handle request."""
+    # Mock a ClientResponse
+    mock_response = AsyncMock(spec=aiohttp.ClientResponse)
+    mock_response.status = 200
+    mock_response.text.return_value = json.dumps(PROFILE_DATA)
+    yield mock_response
+
+
+@pytest.fixture(name="client_session")
+async def client_fixture(
+    aiohttp_client: Any, loop: Any
+) -> AsyncGenerator[aiohttp.ClientSession]:
+    async def mock_request(method, url, **kwargs):
+        async with handle_request(method, url, **kwargs) as response:
+            return response
+
+    session = aiohttp.ClientSession(loop=loop)  # , json_serialize=json.json_dumps)
+    object.__setattr__(session, "_request", mock_request)
+    yield session
+    await session.close()
+
+
+@pytest.fixture(name="user_api")
+def api_client(
+    client_session: aiohttp.ClientSession,
+) -> Generator[fitbit_web_api.UserApi, None, None]:
+    with patch(
+        "fitbit_web_api.rest.aiohttp.ClientSession", return_value=client_session
+    ):
+        yield fitbit_web_api.UserApi(fitbit_web_api.ApiClient())
+
+
+async def test_get_profile_async_req(user_api: fitbit_web_api.UserApi) -> None:
+    """Test case for get_profile as an async request."""
+
+    result = user_api.get_profile(async_req=True)
+    profile = await result.get()
+    assert "encodedId" in profile
+
+
+async def test_get_profile(user_api: fitbit_web_api.UserApi) -> None:
+    """Test case for get_profile."""
+    profile = await user_api.get_profile(async_req=False)
+    assert "encodedId" in profile
