@@ -66,7 +66,7 @@ async def client_fixture(
 
 
 @pytest.fixture(name="user_api")
-def api_client(
+async def api_client(
     client_session: aiohttp.ClientSession,
 ) -> Generator[fitbit_web_api.UserApi, None, None]:
     with patch(
