@@ -157,6 +157,7 @@ class RESTClientObject(object):
 
         async with self.pool_manager.request(**args) as r:
             data = await r.text()
+            logging.debug("response body: %s", data)
             r = RESTResponse(r, data)
 
         # log response body
