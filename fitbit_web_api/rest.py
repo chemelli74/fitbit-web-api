@@ -157,11 +157,10 @@ class RESTClientObject(object):
 
         async with self.pool_manager.request(**args) as r:
             data = await r.text()
-            logging.debug("response body: %s", data)
             r = RESTResponse(r, data)
 
         # log response body
-        logger.debug("response body: %s", r.data)
+        logging.info("response body: %s", data)
 
         if not 200 <= r.status <= 299:
             raise ApiException(http_resp=r)
