@@ -1,8 +1,34 @@
 # Changelog
 
-## v0.2.0 (2024-12-01)
+## v1.0.0-rc.1 (2025-05-26)
 
-### Unknown
+### Build system
+
+- Bump python-semantic-release/python-semantic-release ([`c4f946d`](https://github.com/chemelli74/fitbit-web-api/commit/c4f946d385a19569c4dd8517a8a1bea6013ca54b))
+- Bump python-semantic-release/python-semantic-release from 9.21.0 to 9.21.1 ([`37fe6b6`](https://github.com/chemelli74/fitbit-web-api/commit/37fe6b67b39f68dd676413dbb034f19248116926))
+- Bump certifi from 2025.1.31 to 2025.4.26 ([`e3d2a8a`](https://github.com/chemelli74/fitbit-web-api/commit/e3d2a8ab63a7869320ff7a956749c41aa592114a))
+- Bump setuptools from 75.3.0 to 75.3.2 ([`9a0395d`](https://github.com/chemelli74/fitbit-web-api/commit/9a0395d8e46d5856f7a72a433cb9c0a0ae3fe584))
+- Bump pytest from 8.3.4 to 8.3.5 ([`8ffc427`](https://github.com/chemelli74/fitbit-web-api/commit/8ffc4278b896acba8dac98ca650077718c535165))
+- Bump python-semantic-release/python-semantic-release from 9.20.0 to 9.21.0 ([`a4b4261`](https://github.com/chemelli74/fitbit-web-api/commit/a4b4261cb6485262fe2808bb0de89d6c36ff3ce2))
+- Bump python-semantic-release/python-semantic-release from 9.19.1 to 9.20.0 ([`f35e8e7`](https://github.com/chemelli74/fitbit-web-api/commit/f35e8e7d70f8da9fddc79754d57a03fdbc44e881))
+- Bump python-semantic-release/python-semantic-release from 9.19.0 to 9.19.1 ([`c5977af`](https://github.com/chemelli74/fitbit-web-api/commit/c5977af49343e4b6310ec5f626e972a6d245d350))
+- Bump python-semantic-release/python-semantic-release from 9.18.1 to 9.19.0 ([`16867be`](https://github.com/chemelli74/fitbit-web-api/commit/16867be0a98bf25f979c10de91c49db57c615da4))
+- Bump python-semantic-release/python-semantic-release from 9.18.0 to 9.18.1 ([`96aee55`](https://github.com/chemelli74/fitbit-web-api/commit/96aee5529baa17017a245597c54bea6075441c83))
+- Bump python-semantic-release/python-semantic-release from 9.17.0 to 9.18.0 ([`a41cb02`](https://github.com/chemelli74/fitbit-web-api/commit/a41cb02d03cb88c166931025e3ac5fcb2562e11a))
+- Bump certifi from 2024.12.14 to 2025.1.31 ([`745fd9f`](https://github.com/chemelli74/fitbit-web-api/commit/745fd9ffd3713b71486db6109e5199146e6136ea))
+- Bump python-semantic-release/python-semantic-release from 9.16.1 to 9.17.0 ([`d4ece65`](https://github.com/chemelli74/fitbit-web-api/commit/d4ece6543a61f365d6dfde931155ed9e309a4798))
+- Bump wagoid/commitlint-github-action from 6.2.0 to 6.2.1 ([`0921fb1`](https://github.com/chemelli74/fitbit-web-api/commit/0921fb1dc69b208643c71e4bdb40bce27e3aaccf))
+- Bump python-semantic-release/python-semantic-release from 9.15.2 to 9.16.1 ([`bf9605b`](https://github.com/chemelli74/fitbit-web-api/commit/bf9605beb5f507a7323375b16ee8d3daed88affb))
+- Bump wagoid/commitlint-github-action from 6.1.2 to 6.2.0 ([`b564273`](https://github.com/chemelli74/fitbit-web-api/commit/b564273c276fac45f72dfcaa9cf50ce695c396f3))
+- Bump python-semantic-release/python-semantic-release from 9.15.1 to 9.15.2 ([`49cdadc`](https://github.com/chemelli74/fitbit-web-api/commit/49cdadcc592080c1f0166a3e664e089a9f20424a))
+- Bump certifi from 2024.8.30 to 2024.12.14 ([`a61da41`](https://github.com/chemelli74/fitbit-web-api/commit/a61da410fa5d4f38c9366b6d933ae07befb7b409))
+- Bump six from 1.16.0 to 1.17.0 ([`b1e56e3`](https://github.com/chemelli74/fitbit-web-api/commit/b1e56e36054aaffb4c8e5358cb2b771920d3e315))
+- Bump python-semantic-release/python-semantic-release from 9.15.0 to 9.15.1 ([`a5329e7`](https://github.com/chemelli74/fitbit-web-api/commit/a5329e744c924353689cc3a53045daf8d22a00a6))
+- Bump pytest from 8.3.3 to 8.3.4 ([`e87a977`](https://github.com/chemelli74/fitbit-web-api/commit/e87a977e88a83e2bbcbd878fd5fd715d7b512857))
+- Bump python-semantic-release/python-semantic-release ([`0c07a22`](https://github.com/chemelli74/fitbit-web-api/commit/0c07a22ff6ff944f8220f5678808f23b83ba8cfc))
+
+
+## v0.2.0 (2024-12-01)
 
 ### Build system
 
@@ -116,16 +142,12 @@
 
 ## v0.1.1 (2023-12-21)
 
-### Unknown
-
 ### Bug fixes
 
 - Ci package distributons ([`11b26d2`](https://github.com/chemelli74/fitbit-web-api/commit/11b26d2473dd507e9a278360df310aeecd9bafc5))
 
 
 ## v0.1.0 (2023-12-21)
-
-### Unknown
 
 ### Bug fixes
 
