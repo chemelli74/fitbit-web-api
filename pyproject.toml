@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fitbit-web-api"
-version = "1.0.0-rc.1"
+version = "1.0.0"
 description = "Swagger python Fitbit Web API"
 authors = ["Simone Chemelli <simone.chemelli@gmail.com>"]
 license = "Apache Software License 2.0"

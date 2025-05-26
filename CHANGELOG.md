@@ -1,10 +1,10 @@
 # Changelog
 
-## v1.0.0-rc.1 (2025-05-26)
+## v1.0.0 (2025-05-26)
 
 ### Build system
 
-- Bump python-semantic-release/python-semantic-release ([`c4f946d`](https://github.com/chemelli74/fitbit-web-api/commit/c4f946d385a19569c4dd8517a8a1bea6013ca54b))
+- Bump python-semantic-release/python-semantic-release from 9.21.1 to 10.0.1 ([`ecd1d2d`](https://github.com/chemelli74/fitbit-web-api/commit/ecd1d2d158eec5bf539fbeb80568b0a54db126cf))
 - Bump python-semantic-release/python-semantic-release from 9.21.0 to 9.21.1 ([`37fe6b6`](https://github.com/chemelli74/fitbit-web-api/commit/37fe6b67b39f68dd676413dbb034f19248116926))
 - Bump certifi from 2025.1.31 to 2025.4.26 ([`e3d2a8a`](https://github.com/chemelli74/fitbit-web-api/commit/e3d2a8ab63a7869320ff7a956749c41aa592114a))
 - Bump setuptools from 75.3.0 to 75.3.2 ([`9a0395d`](https://github.com/chemelli74/fitbit-web-api/commit/9a0395d8e46d5856f7a72a433cb9c0a0ae3fe584))
