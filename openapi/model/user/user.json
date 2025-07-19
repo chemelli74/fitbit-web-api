@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "properties": {
+    "age": { "type": "integer" },
+    "ambassador": { "type": "boolean" },
+    "autoStrideEnabled": { "type": "boolean" },
+    "avatar": { "type": "string", "format": "uri" },
+    "avatar150": { "type": "string", "format": "uri" },
+    "avatar640": { "type": "string", "format": "uri" },
+    "averageDailySteps": { "type": "integer" },
+    "challengesBeta": { "type": "boolean" },
+    "clockTimeDisplayFormat": { "type": "string" },
+    "corporate": { "type": "boolean" },
+    "corporateAdmin": { "type": "boolean" },
+    "country": { "type": "string" },
+    "dateOfBirth": { "type": "string", "format": "date" },
+    "displayName": { "type": "string" },
+    "displayNameSetting": { "type": "string" },
+    "distanceUnit": { "type": "string" },
+    "encodedId": { "type": "string" },
+    "features": {
+      "type": "object",
+      "properties": {
+        "exerciseGoal": { "type": "boolean" }
+      }
+    },
+    "firstName": { "type": "string" },
+    "foodsLocale": { "type": "string" },
+    "fullName": { "type": "string" },
+    "gender": { "type": "string" },
+    "glucoseUnit": { "type": "string" },
+    "height": { "type": "number" },
+    "heightUnit": { "type": "string" },
+    "isBugReportEnabled": { "type": "boolean" },
+    "isChild": { "type": "boolean" },
+    "isCoach": { "type": "boolean" },
+    "languageLocale": { "type": "string" },
+    "lastName": { "type": "string" },
+    "legalTermsAcceptRequired": { "type": "boolean" },
+    "locale": { "type": "string" },
+    "memberSince": { "type": "string", "format": "date" },
+    "mfaEnabled": { "type": "boolean" },
+    "offsetFromUTCMillis": { "type": "integer" },
+    "sdkDeveloper": { "type": "boolean" },
+    "sleepTracking": { "type": "string" },
+    "startDayOfWeek": { "type": "string" },
+    "strideLengthRunning": { "type": "number" },
+    "strideLengthRunningType": { "type": "string" },
+    "strideLengthWalking": { "type": "number" },
+    "strideLengthWalkingType": { "type": "string" },
+    "swimUnit": { "type": "string" },
+    "timezone": { "type": "string" },
+    "topBadges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Badge"
+      }
+    },
+    "waterUnit": { "type": "string" },
+    "waterUnitName": { "type": "string" },
+    "weight": { "type": "number" },
+    "weightUnit": { "type": "string" }
+  }
+}

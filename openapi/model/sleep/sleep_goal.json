@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "updatedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp that the goal was created/updated."
+    },
+    "minDuration": {
+      "type": "integer",
+      "description": "Length of the sleep goal period in minutes."
+    },
+    "bedtime": {
+      "type": "string",
+      "description": "The user's targeted bedtime."
+    },
+    "wakeupTime": {
+      "type": "string",
+      "description": "The user's targeted wake time."
+    }
+  }
+}

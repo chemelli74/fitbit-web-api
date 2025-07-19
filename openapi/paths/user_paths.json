@@ -1,0 +1,15 @@
+{
+  "/1/user/-/profile.json": {
+    "get": {
+      "200": "GetProfileResponse"
+    },
+    "post": {
+      "200": "GetProfileResponse"
+    }
+  },
+  "/1/user/-/badges.json": {
+    "get": {
+      "200": "GetBadgesResponse"
+    }
+  }
+}
