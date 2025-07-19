@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "badgeGradientEndColor": { "type": "string" },
+    "badgeGradientStartColor": { "type": "string" },
+    "badgeType": { "type": "string" },
+    "category": { "type": "string" },
+    "cheers": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "dateTime": { "type": "string", "format": "date-time" },
+    "description": { "type": "string" },
+    "earnedMessage": { "type": "string" },
+    "encodedId": { "type": "string" },
+    "image100px": { "type": "string", "format": "uri" },
+    "image125px": { "type": "string", "format": "uri" },
+    "image300px": { "type": "string", "format": "uri" },
+    "image50px": { "type": "string", "format": "uri" },
+    "image75px": { "type": "string", "format": "uri" },
+    "marketingDescription": { "type": "string" },
+    "mobileDescription": { "type": "string" },
+    "name": { "type": "string" },
+    "shareImage640px": { "type": "string", "format": "uri" },
+    "shareText": { "type": "string" },
+    "shortDescription": { "type": "string" },
+    "shortName": { "type": "string" },
+    "timesAchieved": { "type": "integer" },
+    "value": { "type": "integer" },
+    "unit": { "type": "string" }
+  }
+}
