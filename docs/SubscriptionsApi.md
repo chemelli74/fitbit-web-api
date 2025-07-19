@@ -1,6 +1,6 @@
 # fitbit_web_api.SubscriptionsApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                                                   | HTTP request                                                                   | Description                 |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | --------------------------- |
@@ -18,35 +18,46 @@ Adds a subscription in your application so that users can get notifications and 
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.SubscriptionsApi(fitbit_web_api.ApiClient(configuration))
-collection_path = 'collection_path_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
-subscription_id = 'subscription_id_example' # str | This is the unique ID of the subscription created by the API client application. Each ID must be unique across the entire set of subscribers and collections. The Fitbit servers will pass this ID back along with any notifications about the user indicated by the user parameter in the URL path.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Add a Subscription
-    api_instance.add_subscriptions(collection_path, subscription_id)
-except ApiException as e:
-    print("Exception when calling SubscriptionsApi->add_subscriptions: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.SubscriptionsApi(api_client)
+    collection_path = 'collection_path_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
+    subscription_id = 'subscription_id_example' # str | This is the unique ID of the subscription created by the API client application. Each ID must be unique across the entire set of subscribers and collections. The Fitbit servers will pass this ID back along with any notifications about the user indicated by the user parameter in the URL path.
+
+    try:
+        # Add a Subscription
+        await api_instance.add_subscriptions(collection_path, subscription_id)
+    except Exception as e:
+        print("Exception when calling SubscriptionsApi->add_subscriptions: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                           | Notes |
-| ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **collection_path** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#x27; updates. Each subscriber can have only one subscription for a specific user&#x27;s collection. |
-| **subscription_id** | **str** | This is the unique ID of the subscription created by the API client application. Each ID must be unique across the entire set of subscribers and collections. The Fitbit servers will pass this ID back along with any notifications about the user indicated by the user parameter in the URL path.                                                                                                  |
+| Name                | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                         | Notes |
+| ------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **collection_path** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#39; updates. Each subscriber can have only one subscription for a specific user&#39;s collection. |
+| **subscription_id** | **str** | This is the unique ID of the subscription created by the API client application. Each ID must be unique across the entire set of subscribers and collections. The Fitbit servers will pass this ID back along with any notifications about the user indicated by the user parameter in the URL path.                                                                                                |
 
 ### Return type
 
@@ -60,6 +71,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | Returned if the given user is already subscribed to the stream.                                                                                                                                      | -                |
+| **201**     | Returned if a new subscription was created in response to your request.                                                                                                                              | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -73,35 +92,46 @@ Deletes a subscription for a user..
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.SubscriptionsApi(fitbit_web_api.ApiClient(configuration))
-collection_path = 'collection_path_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
-subscription_id = 'subscription_id_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete a Subscription
-    api_instance.delete_subscriptions(collection_path, subscription_id)
-except ApiException as e:
-    print("Exception when calling SubscriptionsApi->delete_subscriptions: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.SubscriptionsApi(api_client)
+    collection_path = 'collection_path_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
+    subscription_id = 'subscription_id_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
+
+    try:
+        # Delete a Subscription
+        await api_instance.delete_subscriptions(collection_path, subscription_id)
+    except Exception as e:
+        print("Exception when calling SubscriptionsApi->delete_subscriptions: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                           | Notes |
-| ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **collection_path** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#x27; updates. Each subscriber can have only one subscription for a specific user&#x27;s collection. |
-| **subscription_id** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#x27; updates. Each subscriber can have only one subscription for a specific user&#x27;s collection. |
+| Name                | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                         | Notes |
+| ------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **collection_path** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#39; updates. Each subscriber can have only one subscription for a specific user&#39;s collection. |
+| **subscription_id** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#39; updates. Each subscriber can have only one subscription for a specific user&#39;s collection. |
 
 ### Return type
 
@@ -115,6 +145,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -128,33 +166,44 @@ Retreives a list of a user's subscriptions for your application in the format re
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.SubscriptionsApi(fitbit_web_api.ApiClient(configuration))
-collection_path = 'collection_path_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get a List of Subscriptions
-    api_instance.get_subscriptions_list(collection_path)
-except ApiException as e:
-    print("Exception when calling SubscriptionsApi->get_subscriptions_list: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.SubscriptionsApi(api_client)
+    collection_path = 'collection_path_example' # str | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections' updates. Each subscriber can have only one subscription for a specific user's collection.
+
+    try:
+        # Get a List of Subscriptions
+        await api_instance.get_subscriptions_list(collection_path)
+    except Exception as e:
+        print("Exception when calling SubscriptionsApi->get_subscriptions_list: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name                | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                           | Notes |
-| ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| **collection_path** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#x27; updates. Each subscriber can have only one subscription for a specific user&#x27;s collection. |
+| Name                | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                         | Notes |
+| ------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| **collection_path** | **str** | This is the resource of the collection to receive notifications from (foods, activities, sleep, or body). If not present, subscription will be created for all collections. If you have both all and specific collection subscriptions, you will get duplicate notifications on that collections&#39; updates. Each subscriber can have only one subscription for a specific user&#39;s collection. |
 
 ### Return type
 
@@ -168,5 +217,13 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | Returned if the given user is already subscribed to the stream.                                                                                                                                      | -                |
+| **201**     | Returned if a new subscription was created in response to your request.                                                                                                                              | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

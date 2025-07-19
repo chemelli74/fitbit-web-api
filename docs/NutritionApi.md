@@ -1,13 +1,12 @@
 # fitbit_web_api.NutritionApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                                             | HTTP request                                             | Description          |
 | ------------------------------------------------------------------ | -------------------------------------------------------- | -------------------- |
 | [**add_favorite_food**](NutritionApi.md#add_favorite_food)         | **POST** /1/user/-/foods/log/favorite/{food-id}.json     | Add Favorite Food    |
 | [**add_foods**](NutritionApi.md#add_foods)                         | **POST** /1/user/-/foods.json                            | Create Food          |
 | [**add_foods_log**](NutritionApi.md#add_foods_log)                 | **POST** /1/user/-/foods/log.json                        | Log Food             |
-| [**add_meal**](NutritionApi.md#add_meal)                           | **POST** /1/user/-/meals.json                            | Create Meal          |
 | [**add_update_foods_goal**](NutritionApi.md#add_update_foods_goal) | **POST** /1/user/-/foods/log/goal.json                   | Update Food Goal     |
 | [**add_update_water_goal**](NutritionApi.md#add_update_water_goal) | **POST** /1/user/-/foods/log/water/goal.json             | Update Water Goal    |
 | [**add_water_log**](NutritionApi.md#add_water_log)                 | **POST** /1/user/-/foods/log/water.json                  | Log Water            |
@@ -25,7 +24,6 @@ All URIs are relative to *https://api.fitbit.com/*
 | [**get_foods_locales**](NutritionApi.md#get_foods_locales)         | **GET** /1/foods/locales.json                            | Get Food Locales     |
 | [**get_foods_units**](NutritionApi.md#get_foods_units)             | **GET** /1/foods/units.json                              | Get Food Units       |
 | [**get_frequent_foods**](NutritionApi.md#get_frequent_foods)       | **GET** /1/user/-/foods/log/frequent.json                | Get Frequent Foods   |
-| [**get_meals**](NutritionApi.md#get_meals)                         | **GET** /1/user/-/meals.json                             | Get Meals            |
 | [**get_recent_foods**](NutritionApi.md#get_recent_foods)           | **GET** /1/user/-/foods/log/recent.json                  | Get Recent Foods     |
 | [**get_water_by_date**](NutritionApi.md#get_water_by_date)         | **GET** /1/user/-/foods/log/water/date/{date}.json       | Get Water Logs       |
 | [**get_water_goal**](NutritionApi.md#get_water_goal)               | **GET** /1/user/-/foods/log/water/goal.json              | Get Water Goal       |
@@ -42,33 +40,44 @@ Updates a user's daily activity goals and returns a response using units in the 
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-food_id = 'food_id_example' # str | The ID of the food to be added to user's favorites.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Add Favorite Food
-    api_instance.add_favorite_food(food_id)
-except ApiException as e:
-    print("Exception when calling NutritionApi->add_favorite_food: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    food_id = 'food_id_example' # str | The ID of the food to be added to user's favorites.
+
+    try:
+        # Add Favorite Food
+        await api_instance.add_favorite_food(food_id)
+    except Exception as e:
+        print("Exception when calling NutritionApi->add_favorite_food: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name        | Type    | Description                                              | Notes |
-| ----------- | ------- | -------------------------------------------------------- | ----- |
-| **food_id** | **str** | The ID of the food to be added to user&#x27;s favorites. |
+| Name        | Type    | Description                                             | Notes |
+| ----------- | ------- | ------------------------------------------------------- | ----- |
+| **food_id** | **str** | The ID of the food to be added to user&#39;s favorites. |
 
 ### Return type
 
@@ -83,6 +92,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_foods**
@@ -95,31 +113,42 @@ Creates a new private food for a user and returns a response in the format reque
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-name = 'name_example' # str | The food name.
-default_food_measurement_unit_id = 'default_food_measurement_unit_id_example' # str | The ID of the default measurement unit. Full list of units can be retrieved via the Get Food Units endpoint.
-default_serving_size = 'default_serving_size_example' # str | The size of the default serving. Nutrition values should be provided for this serving size.
-calories = 'calories_example' # str | The calories in the default serving size.
-form_type = 'form_type_example' # str | Form type; LIQUID or DRY. (optional)
-description = 'description_example' # str | The description of the food. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Create Food
-    api_instance.add_foods(name, default_food_measurement_unit_id, default_serving_size, calories, form_type=form_type, description=description)
-except ApiException as e:
-    print("Exception when calling NutritionApi->add_foods: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    name = 'name_example' # str | The food name.
+    default_food_measurement_unit_id = 'default_food_measurement_unit_id_example' # str | The ID of the default measurement unit. Full list of units can be retrieved via the Get Food Units endpoint.
+    default_serving_size = 'default_serving_size_example' # str | The size of the default serving. Nutrition values should be provided for this serving size.
+    calories = 'calories_example' # str | The calories in the default serving size.
+    form_type = 'form_type_example' # str | Form type; LIQUID or DRY. (optional)
+    description = 'description_example' # str | The description of the food. (optional)
+
+    try:
+        # Create Food
+        await api_instance.add_foods(name, default_food_measurement_unit_id, default_serving_size, calories, form_type=form_type, description=description)
+    except Exception as e:
+        print("Exception when calling NutritionApi->add_foods: %s\n" % e)
 ```
 
 ### Parameters
@@ -146,11 +175,20 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **201**     | The request has been fulfilled and resulted in a new resource being created. | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.            | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_foods_log**
 
-> add_foods_log(food_id, meal_type_id, unit_id, amount, \_date, food_name=food_name, favorite=favorite, brand_name=brand_name, calories=calories)
+> add_foods_log(food_id, meal_type_id, unit_id, amount, var_date, food_name=food_name, favorite=favorite, brand_name=brand_name, calories=calories)
 
 Log Food
 
@@ -158,49 +196,60 @@ Creates food log entries for users with or without foodId value.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-food_id = 'food_id_example' # str | The ID of the food to be logged. Either foodId or foodName must be provided.
-meal_type_id = 'meal_type_id_example' # str | Meal types. 1=Breakfast; 2=Morning Snack; 3=Lunch; 4=Afternoon Snack; 5=Dinner; 7=Anytime.
-unit_id = 'unit_id_example' # str | The ID of units used. Typically retrieved via a previous call to Get Food Logs, Search Foods, or Get Food Units.
-amount = 'amount_example' # str | The amount consumed in the format X.XX in the specified unitId.
-_date = '2013-10-20' # date | Log entry date in the format yyyy-MM-dd.
-food_name = 'food_name_example' # str | Food entry name. Either foodId or foodName must be provided. (optional)
-favorite = true # bool | The `true` value will add the food to the user's favorites after creating the log entry; while the `false` value will not. Valid only with foodId value. (optional)
-brand_name = 'brand_name_example' # str | Brand name of food. Valid only with foodName parameters. (optional)
-calories = 56 # int | Calories for this serving size. This is allowed with foodName parameter (default to zero); otherwise it is ignored. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Log Food
-    api_instance.add_foods_log(food_id, meal_type_id, unit_id, amount, _date, food_name=food_name, favorite=favorite, brand_name=brand_name, calories=calories)
-except ApiException as e:
-    print("Exception when calling NutritionApi->add_foods_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    food_id = 'food_id_example' # str | The ID of the food to be logged. Either foodId or foodName must be provided.
+    meal_type_id = 'meal_type_id_example' # str | Meal types. 1=Breakfast; 2=Morning Snack; 3=Lunch; 4=Afternoon Snack; 5=Dinner; 7=Anytime.
+    unit_id = 'unit_id_example' # str | The ID of units used. Typically retrieved via a previous call to Get Food Logs, Search Foods, or Get Food Units.
+    amount = 'amount_example' # str | The amount consumed in the format X.XX in the specified unitId.
+    var_date = '2013-10-20' # date | Log entry date in the format yyyy-MM-dd.
+    food_name = 'food_name_example' # str | Food entry name. Either foodId or foodName must be provided. (optional)
+    favorite = True # bool | The `true` value will add the food to the user's favorites after creating the log entry; while the `false` value will not. Valid only with foodId value. (optional)
+    brand_name = 'brand_name_example' # str | Brand name of food. Valid only with foodName parameters. (optional)
+    calories = 56 # int | Calories for this serving size. This is allowed with foodName parameter (default to zero); otherwise it is ignored. (optional)
+
+    try:
+        # Log Food
+        await api_instance.add_foods_log(food_id, meal_type_id, unit_id, amount, var_date, food_name=food_name, favorite=favorite, brand_name=brand_name, calories=calories)
+    except Exception as e:
+        print("Exception when calling NutritionApi->add_foods_log: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name             | Type     | Description                                                                                                                                                                       | Notes      |
-| ---------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **food_id**      | **str**  | The ID of the food to be logged. Either foodId or foodName must be provided.                                                                                                      |
-| **meal_type_id** | **str**  | Meal types. 1&#x3D;Breakfast; 2&#x3D;Morning Snack; 3&#x3D;Lunch; 4&#x3D;Afternoon Snack; 5&#x3D;Dinner; 7&#x3D;Anytime.                                                          |
-| **unit_id**      | **str**  | The ID of units used. Typically retrieved via a previous call to Get Food Logs, Search Foods, or Get Food Units.                                                                  |
-| **amount**       | **str**  | The amount consumed in the format X.XX in the specified unitId.                                                                                                                   |
-| **\_date**       | **date** | Log entry date in the format yyyy-MM-dd.                                                                                                                                          |
-| **food_name**    | **str**  | Food entry name. Either foodId or foodName must be provided.                                                                                                                      | [optional] |
-| **favorite**     | **bool** | The &#x60;true&#x60; value will add the food to the user&#x27;s favorites after creating the log entry; while the &#x60;false&#x60; value will not. Valid only with foodId value. | [optional] |
-| **brand_name**   | **str**  | Brand name of food. Valid only with foodName parameters.                                                                                                                          | [optional] |
-| **calories**     | **int**  | Calories for this serving size. This is allowed with foodName parameter (default to zero); otherwise it is ignored.                                                               | [optional] |
+| Name             | Type     | Description                                                                                                                                                                      | Notes      |
+| ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **food_id**      | **str**  | The ID of the food to be logged. Either foodId or foodName must be provided.                                                                                                     |
+| **meal_type_id** | **str**  | Meal types. 1&#x3D;Breakfast; 2&#x3D;Morning Snack; 3&#x3D;Lunch; 4&#x3D;Afternoon Snack; 5&#x3D;Dinner; 7&#x3D;Anytime.                                                         |
+| **unit_id**      | **str**  | The ID of units used. Typically retrieved via a previous call to Get Food Logs, Search Foods, or Get Food Units.                                                                 |
+| **amount**       | **str**  | The amount consumed in the format X.XX in the specified unitId.                                                                                                                  |
+| **var_date**     | **date** | Log entry date in the format yyyy-MM-dd.                                                                                                                                         |
+| **food_name**    | **str**  | Food entry name. Either foodId or foodName must be provided.                                                                                                                     | [optional] |
+| **favorite**     | **bool** | The &#x60;true&#x60; value will add the food to the user&#39;s favorites after creating the log entry; while the &#x60;false&#x60; value will not. Valid only with foodId value. | [optional] |
+| **brand_name**   | **str**  | Brand name of food. Valid only with foodName parameters.                                                                                                                         | [optional] |
+| **calories**     | **int**  | Calories for this serving size. This is allowed with foodName parameter (default to zero); otherwise it is ignored.                                                              | [optional] |
 
 ### Return type
 
@@ -215,58 +264,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+### HTTP response details
 
-# **add_meal**
-
-> add_meal(body)
-
-Create Meal
-
-Creates a meal with the given food contained in the post body.
-
-### Example
-
-```python
-from __future__ import print_function
-import time
-import fitbit_web_api
-from fitbit_web_api.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-body = fitbit_web_api.Meal() # Meal | Meal to create
-
-try:
-    # Create Meal
-    api_instance.add_meal(body)
-except ApiException as e:
-    print("Exception when calling NutritionApi->add_meal: %s\n" % e)
-```
-
-### Parameters
-
-| Name     | Type                | Description    | Notes |
-| -------- | ------------------- | -------------- | ----- |
-| **body** | [**Meal**](Meal.md) | Meal to create |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: Not defined
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **201**     | The request has been fulfilled and resulted in a new resource being created. | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.            | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -280,28 +285,39 @@ Updates a user's daily calories consumption goal or food plan and returns a resp
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-calories = 56 # int | Manual calorie consumption goal in either calories or intensity must be provided.
-intensity = 'intensity_example' # str | Food plan intensity (MAINTENANCE, EASIER, MEDIUM, KINDAHARD, or HARDER). Either calories or intensity must be provided. (optional)
-personalized = 'personalized_example' # str | Food plan type; true or false. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Update Food Goal
-    api_instance.add_update_foods_goal(calories, intensity=intensity, personalized=personalized)
-except ApiException as e:
-    print("Exception when calling NutritionApi->add_update_foods_goal: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    calories = 56 # int | Manual calorie consumption goal in either calories or intensity must be provided.
+    intensity = 'intensity_example' # str | Food plan intensity (MAINTENANCE, EASIER, MEDIUM, KINDAHARD, or HARDER). Either calories or intensity must be provided. (optional)
+    personalized = 'personalized_example' # str | Food plan type; true or false. (optional)
+
+    try:
+        # Update Food Goal
+        await api_instance.add_update_foods_goal(calories, intensity=intensity, personalized=personalized)
+    except Exception as e:
+        print("Exception when calling NutritionApi->add_update_foods_goal: %s\n" % e)
 ```
 
 ### Parameters
@@ -325,6 +341,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **201**     | The request has been fulfilled and resulted in a new resource being created. | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.            | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_update_water_goal**
@@ -337,26 +362,37 @@ Updates a user's daily calories consumption goal or food plan and returns a resp
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-target = 56 # int | The target water goal in the format X.X is set in unit based on locale.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Update Water Goal
-    api_instance.add_update_water_goal(target)
-except ApiException as e:
-    print("Exception when calling NutritionApi->add_update_water_goal: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    target = 56 # int | The target water goal in the format X.X is set in unit based on locale.
+
+    try:
+        # Update Water Goal
+        await api_instance.add_update_water_goal(target)
+    except Exception as e:
+        print("Exception when calling NutritionApi->add_update_water_goal: %s\n" % e)
 ```
 
 ### Parameters
@@ -378,11 +414,20 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **201**     | The request has been fulfilled and resulted in a new resource being created. | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.            | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_water_log**
 
-> add_water_log(\_date, amount, unit=unit)
+> add_water_log(var_date, amount, unit=unit)
 
 Log Water
 
@@ -390,37 +435,48 @@ Creates a log entry for water using units in the unit systems that corresponds t
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date of records to be returned in the format yyyy-MM-dd.
-amount = 56 # int | The amount consumption in the format X.XX and in the specified waterUnit or in the unit system that corresponds to the Accept-Language header provided.
-unit = 'unit_example' # str | Water measurement unit; `ml`, `fl oz`, or `cup`. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Log Water
-    api_instance.add_water_log(_date, amount, unit=unit)
-except ApiException as e:
-    print("Exception when calling NutritionApi->add_water_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    var_date = '2013-10-20' # date | The date of records to be returned in the format yyyy-MM-dd.
+    amount = 56 # int | The amount consumption in the format X.XX and in the specified waterUnit or in the unit system that corresponds to the Accept-Language header provided.
+    unit = 'unit_example' # str | Water measurement unit; `ml`, `fl oz`, or `cup`. (optional)
+
+    try:
+        # Log Water
+        await api_instance.add_water_log(var_date, amount, unit=unit)
+    except Exception as e:
+        print("Exception when calling NutritionApi->add_water_log: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name       | Type     | Description                                                                                                                                             | Notes      |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **\_date** | **date** | The date of records to be returned in the format yyyy-MM-dd.                                                                                            |
-| **amount** | **int**  | The amount consumption in the format X.XX and in the specified waterUnit or in the unit system that corresponds to the Accept-Language header provided. |
-| **unit**   | **str**  | Water measurement unit; &#x60;ml&#x60;, &#x60;fl oz&#x60;, or &#x60;cup&#x60;.                                                                          | [optional] |
+| Name         | Type     | Description                                                                                                                                             | Notes      |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **var_date** | **date** | The date of records to be returned in the format yyyy-MM-dd.                                                                                            |
+| **amount**   | **int**  | The amount consumption in the format X.XX and in the specified waterUnit or in the unit system that corresponds to the Accept-Language header provided. |
+| **unit**     | **str**  | Water measurement unit; &#x60;ml&#x60;, &#x60;fl oz&#x60;, or &#x60;cup&#x60;.                                                                          | [optional] |
 
 ### Return type
 
@@ -434,6 +490,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **201**     | The request has been fulfilled and resulted in a new resource being created. | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.            | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -447,33 +512,44 @@ Deletes a food with the given ID to the user's list of favorite foods.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-food_id = 'food_id_example' # str | The ID of the food to be deleted from user's favorites.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Favorite Food
-    api_instance.delete_favorite_food(food_id)
-except ApiException as e:
-    print("Exception when calling NutritionApi->delete_favorite_food: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    food_id = 'food_id_example' # str | The ID of the food to be deleted from user's favorites.
+
+    try:
+        # Delete Favorite Food
+        await api_instance.delete_favorite_food(food_id)
+    except Exception as e:
+        print("Exception when calling NutritionApi->delete_favorite_food: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name        | Type    | Description                                                  | Notes |
-| ----------- | ------- | ------------------------------------------------------------ | ----- |
-| **food_id** | **str** | The ID of the food to be deleted from user&#x27;s favorites. |
+| Name        | Type    | Description                                                 | Notes |
+| ----------- | ------- | ----------------------------------------------------------- | ----- |
+| **food_id** | **str** | The ID of the food to be deleted from user&#39;s favorites. |
 
 ### Return type
 
@@ -488,6 +564,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_foods**
@@ -500,26 +584,37 @@ Deletes custom food for a user and returns a response in the format requested.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-food_id = 'food_id_example' # str | The ID of the food to be deleted.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Custom Food
-    api_instance.delete_foods(food_id)
-except ApiException as e:
-    print("Exception when calling NutritionApi->delete_foods: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    food_id = 'food_id_example' # str | The ID of the food to be deleted.
+
+    try:
+        # Delete Custom Food
+        await api_instance.delete_foods(food_id)
+    except Exception as e:
+        print("Exception when calling NutritionApi->delete_foods: %s\n" % e)
 ```
 
 ### Parameters
@@ -541,6 +636,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_foods_log**
@@ -553,26 +656,37 @@ Deletes a user's food log entry with the given ID.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-food_log_id = 'food_log_id_example' # str | The ID of the food log entry to be deleted.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Food Log
-    api_instance.delete_foods_log(food_log_id)
-except ApiException as e:
-    print("Exception when calling NutritionApi->delete_foods_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    food_log_id = 'food_log_id_example' # str | The ID of the food log entry to be deleted.
+
+    try:
+        # Delete Food Log
+        await api_instance.delete_foods_log(food_log_id)
+    except Exception as e:
+        print("Exception when calling NutritionApi->delete_foods_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -594,6 +708,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_meal**
@@ -606,26 +728,37 @@ Deletes a user's meal with the given meal id.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-meal_id = 'meal_id_example' # str | Id of the meal to delete.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Meal
-    api_instance.delete_meal(meal_id)
-except ApiException as e:
-    print("Exception when calling NutritionApi->delete_meal: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    meal_id = 'meal_id_example' # str | Id of the meal to delete.
+
+    try:
+        # Delete Meal
+        await api_instance.delete_meal(meal_id)
+    except Exception as e:
+        print("Exception when calling NutritionApi->delete_meal: %s\n" % e)
 ```
 
 ### Parameters
@@ -647,6 +780,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_water_log**
@@ -659,26 +800,37 @@ Deletes a user's water log entry with the given ID.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-water_log_id = 'water_log_id_example' # str | The ID of the waterUnit log entry to be deleted.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Water Log
-    api_instance.delete_water_log(water_log_id)
-except ApiException as e:
-    print("Exception when calling NutritionApi->delete_water_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    water_log_id = 'water_log_id_example' # str | The ID of the waterUnit log entry to be deleted.
+
+    try:
+        # Delete Water Log
+        await api_instance.delete_water_log(water_log_id)
+    except Exception as e:
+        print("Exception when calling NutritionApi->delete_water_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -700,6 +852,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **edit_foods_log**
@@ -712,30 +872,41 @@ The Edit Food Log endpoint changes the quantity or calories consumed for a user'
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-food_log_id = 'food_log_id_example' # str | The ID of the food log entry to be edited.
-meal_type_id = 'meal_type_id_example' # str | Meal types. 1=Breakfast; 2=Morning Snack; 3=Lunch; 4=Afternoon Snack; 5=Dinner; 7=Anytime.
-unit_id = 'unit_id_example' # str | The ID of units used. Typically retrieved via a previous call to Get Food Logs, Search Foods, or Get Food Units.
-amount = 'amount_example' # str | The amount consumed in the format X.XX in the specified unitId.
-calories = 56 # int | Calories for this serving size. This is allowed with foodName parameter (default to zero); otherwise it is ignored. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Edit Food Log
-    api_instance.edit_foods_log(food_log_id, meal_type_id, unit_id, amount, calories=calories)
-except ApiException as e:
-    print("Exception when calling NutritionApi->edit_foods_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    food_log_id = 'food_log_id_example' # str | The ID of the food log entry to be edited.
+    meal_type_id = 'meal_type_id_example' # str | Meal types. 1=Breakfast; 2=Morning Snack; 3=Lunch; 4=Afternoon Snack; 5=Dinner; 7=Anytime.
+    unit_id = 'unit_id_example' # str | The ID of units used. Typically retrieved via a previous call to Get Food Logs, Search Foods, or Get Food Units.
+    amount = 'amount_example' # str | The amount consumed in the format X.XX in the specified unitId.
+    calories = 56 # int | Calories for this serving size. This is allowed with foodName parameter (default to zero); otherwise it is ignored. (optional)
+
+    try:
+        # Edit Food Log
+        await api_instance.edit_foods_log(food_log_id, meal_type_id, unit_id, amount, calories=calories)
+    except Exception as e:
+        print("Exception when calling NutritionApi->edit_foods_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -761,6 +932,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_favorite_foods**
@@ -773,25 +953,36 @@ Returns a list of a user's favorite foods in the format requested. A favorite fo
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Favorite Foods
-    api_instance.get_favorite_foods()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_favorite_foods: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+
+    try:
+        # Get Favorite Foods
+        await api_instance.get_favorite_foods()
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_favorite_foods: %s\n" % e)
 ```
 
 ### Parameters
@@ -811,11 +1002,20 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_foods_by_date**
 
-> get_foods_by_date(\_date)
+> get_foods_by_date(var_date)
 
 Get Food Logs
 
@@ -823,33 +1023,44 @@ Retreives a summary and list of a user's food log entries for a given day in the
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date of records to be returned. In the format yyyy-MM-dd.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Food Logs
-    api_instance.get_foods_by_date(_date)
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_foods_by_date: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    var_date = '2013-10-20' # date | The date of records to be returned. In the format yyyy-MM-dd.
+
+    try:
+        # Get Food Logs
+        await api_instance.get_foods_by_date(var_date)
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_foods_by_date: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name       | Type     | Description                                                   | Notes |
-| ---------- | -------- | ------------------------------------------------------------- | ----- |
-| **\_date** | **date** | The date of records to be returned. In the format yyyy-MM-dd. |
+| Name         | Type     | Description                                                   | Notes |
+| ------------ | -------- | ------------------------------------------------------------- | ----- |
+| **var_date** | **date** | The date of records to be returned. In the format yyyy-MM-dd. |
 
 ### Return type
 
@@ -863,6 +1074,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                   | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -876,25 +1096,36 @@ Returns a user's current daily calorie consumption goal and/or foodPlan value in
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Food Goals
-    api_instance.get_foods_goal()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_foods_goal: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+
+    try:
+        # Get Food Goals
+        await api_instance.get_foods_goal()
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_foods_goal: %s\n" % e)
 ```
 
 ### Parameters
@@ -914,6 +1145,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                   | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_foods_info**
@@ -926,26 +1166,37 @@ Returns the details of a specific food in the Fitbit food databases or a private
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-food_id = 'food_id_example' # str | The ID of the food.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Food
-    api_instance.get_foods_info(food_id)
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_foods_info: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    food_id = 'food_id_example' # str | The ID of the food.
+
+    try:
+        # Get Food
+        await api_instance.get_foods_info(food_id)
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_foods_info: %s\n" % e)
 ```
 
 ### Parameters
@@ -967,6 +1218,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_foods_list**
@@ -979,26 +1239,37 @@ Returns a list of public foods from the Fitbit food database and private food th
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-query = 'query_example' # str | The URL-encoded search query.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Search Foods
-    api_instance.get_foods_list(query)
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_foods_list: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    query = 'query_example' # str | The URL-encoded search query.
+
+    try:
+        # Search Foods
+        await api_instance.get_foods_list(query)
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_foods_list: %s\n" % e)
 ```
 
 ### Parameters
@@ -1020,6 +1291,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                   | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_foods_locales**
@@ -1032,25 +1312,36 @@ Returns the food locales that the user may choose to search, log, and create foo
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Food Locales
-    api_instance.get_foods_locales()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_foods_locales: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+
+    try:
+        # Get Food Locales
+        await api_instance.get_foods_locales()
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_foods_locales: %s\n" % e)
 ```
 
 ### Parameters
@@ -1069,6 +1360,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1082,25 +1382,36 @@ Returns a list of all valid Fitbit food units in the format requested.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Food Units
-    api_instance.get_foods_units()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_foods_units: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+
+    try:
+        # Get Food Units
+        await api_instance.get_foods_units()
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_foods_units: %s\n" % e)
 ```
 
 ### Parameters
@@ -1119,6 +1430,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1132,25 +1452,36 @@ Returns a list of a user's frequent foods in the format requested. A frequent fo
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Frequent Foods
-    api_instance.get_frequent_foods()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_frequent_foods: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+
+    try:
+        # Get Frequent Foods
+        await api_instance.get_frequent_foods()
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_frequent_foods: %s\n" % e)
 ```
 
 ### Parameters
@@ -1170,55 +1501,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+### HTTP response details
 
-# **get_meals**
-
-> get_meals()
-
-Get Meals
-
-Returns a list of meals created by user in the user's food log in the format requested. User creates and manages meals on the Food Log tab on the website.
-
-### Example
-
-```python
-from __future__ import print_function
-import time
-import fitbit_web_api
-from fitbit_web_api.rest import ApiException
-from pprint import pprint
-
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
-
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-
-try:
-    # Get Meals
-    api_instance.get_meals()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_meals: %s\n" % e)
-```
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1232,25 +1522,36 @@ Returns a list of a user's frequent foods in the format requested. A frequent fo
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Recent Foods
-    api_instance.get_recent_foods()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_recent_foods: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+
+    try:
+        # Get Recent Foods
+        await api_instance.get_recent_foods()
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_recent_foods: %s\n" % e)
 ```
 
 ### Parameters
@@ -1270,11 +1571,20 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_water_by_date**
 
-> get_water_by_date(\_date)
+> get_water_by_date(var_date)
 
 Get Water Logs
 
@@ -1282,33 +1592,44 @@ Retreives a summary and list of a user's water log entries for a given day in th
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date of records to be returned. In the format yyyy-MM-dd.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Water Logs
-    api_instance.get_water_by_date(_date)
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_water_by_date: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    var_date = '2013-10-20' # date | The date of records to be returned. In the format yyyy-MM-dd.
+
+    try:
+        # Get Water Logs
+        await api_instance.get_water_by_date(var_date)
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_water_by_date: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name       | Type     | Description                                                   | Notes |
-| ---------- | -------- | ------------------------------------------------------------- | ----- |
-| **\_date** | **date** | The date of records to be returned. In the format yyyy-MM-dd. |
+| Name         | Type     | Description                                                   | Notes |
+| ------------ | -------- | ------------------------------------------------------------- | ----- |
+| **var_date** | **date** | The date of records to be returned. In the format yyyy-MM-dd. |
 
 ### Return type
 
@@ -1322,6 +1643,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                   | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1335,25 +1665,36 @@ Retreives a summary and list of a user's water goal entries for a given day in t
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Water Goal
-    api_instance.get_water_goal()
-except ApiException as e:
-    print("Exception when calling NutritionApi->get_water_goal: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+
+    try:
+        # Get Water Goal
+        await api_instance.get_water_goal()
+    except Exception as e:
+        print("Exception when calling NutritionApi->get_water_goal: %s\n" % e)
 ```
 
 ### Parameters
@@ -1373,11 +1714,17 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description           | Response headers |
+| ----------- | --------------------- | ---------------- |
+| **200**     | A successful request. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_meal**
 
-> update_meal(body)
+> update_meal(meal_id, meal)
 
 Update Meal
 
@@ -1385,33 +1732,47 @@ Replaces an existing meal with the contents of the request. The response contain
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
+from fitbit_web_api.models.meal import Meal
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-body = fitbit_web_api.Meal() # Meal | Meal to create
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Update Meal
-    api_instance.update_meal(body)
-except ApiException as e:
-    print("Exception when calling NutritionApi->update_meal: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    meal_id = 'meal_id_example' # str | The ID of the meal.
+    meal = fitbit_web_api.Meal() # Meal | Meal to create
+
+    try:
+        # Update Meal
+        await api_instance.update_meal(meal_id, meal)
+    except Exception as e:
+        print("Exception when calling NutritionApi->update_meal: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name     | Type                | Description    | Notes |
-| -------- | ------------------- | -------------- | ----- |
-| **body** | [**Meal**](Meal.md) | Meal to create |
+| Name        | Type                | Description         | Notes |
+| ----------- | ------------------- | ------------------- | ----- |
+| **meal_id** | **str**             | The ID of the meal. |
+| **meal**    | [**Meal**](Meal.md) | Meal to create      |
 
 ### Return type
 
@@ -1426,6 +1787,15 @@ void (empty response body)
 - **Content-Type**: application/json
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_water_log**
@@ -1438,28 +1808,39 @@ Updates a user's water log entry with the given ID.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.NutritionApi(fitbit_web_api.ApiClient(configuration))
-water_log_id = 'water_log_id_example' # str | The ID of the waterUnit log entry to be deleted.
-amount = 'amount_example' # str | Amount consumed; in the format X.X and in the specified waterUnit or in the unit system that corresponds to the Accept-Language header provided.
-unit = 'unit_example' # str | Water measurement unit. 'ml', 'fl oz', or 'cup'. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Update Water Log
-    api_instance.update_water_log(water_log_id, amount, unit=unit)
-except ApiException as e:
-    print("Exception when calling NutritionApi->update_water_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.NutritionApi(api_client)
+    water_log_id = 'water_log_id_example' # str | The ID of the waterUnit log entry to be deleted.
+    amount = 'amount_example' # str | Amount consumed; in the format X.X and in the specified waterUnit or in the unit system that corresponds to the Accept-Language header provided.
+    unit = 'unit_example' # str | Water measurement unit. 'ml', 'fl oz', or 'cup'. (optional)
+
+    try:
+        # Update Water Log
+        await api_instance.update_water_log(water_log_id, amount, unit=unit)
+    except Exception as e:
+        print("Exception when calling NutritionApi->update_water_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -1468,7 +1849,7 @@ except ApiException as e:
 | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
 | **water_log_id** | **str** | The ID of the waterUnit log entry to be deleted.                                                                                                 |
 | **amount**       | **str** | Amount consumed; in the format X.X and in the specified waterUnit or in the unit system that corresponds to the Accept-Language header provided. |
-| **unit**         | **str** | Water measurement unit. &#x27;ml&#x27;, &#x27;fl oz&#x27;, or &#x27;cup&#x27;.                                                                   | [optional] |
+| **unit**         | **str** | Water measurement unit. &#39;ml&#39;, &#39;fl oz&#39;, or &#39;cup&#39;.                                                                         | [optional] |
 
 ### Return type
 
@@ -1482,5 +1863,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                     | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it.       | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

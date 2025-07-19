@@ -1,6 +1,6 @@
 # fitbit_web_api.FriendsApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                                               | HTTP request                                 | Description             |
 | -------------------------------------------------------------------- | -------------------------------------------- | ----------------------- |
@@ -17,25 +17,36 @@ Returns data of a user's friends in the format requested using units in the unit
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.FriendsApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Friends
-    api_instance.get_friends()
-except ApiException as e:
-    print("Exception when calling FriendsApi->get_friends: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.FriendsApi(api_client)
+
+    try:
+        # Get Friends
+        await api_instance.get_friends()
+    except Exception as e:
+        print("Exception when calling FriendsApi->get_friends: %s\n" % e)
 ```
 
 ### Parameters
@@ -54,6 +65,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                            | Response headers |
+| ----------- | ---------------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                                    | -                |
+| **401**     | The request requires user authentication.                              | -                |
+| **403**     | The user&#39;s privacy settings prevent you from seeing their friends. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -67,25 +86,36 @@ Returns data of a user's friends in the format requested using units in the unit
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.FriendsApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Friends Leaderboard
-    api_instance.get_friends_leaderboard()
-except ApiException as e:
-    print("Exception when calling FriendsApi->get_friends_leaderboard: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.FriendsApi(api_client)
+
+    try:
+        # Get Friends Leaderboard
+        await api_instance.get_friends_leaderboard()
+    except Exception as e:
+        print("Exception when calling FriendsApi->get_friends_leaderboard: %s\n" % e)
 ```
 
 ### Parameters
@@ -104,5 +134,12 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                               | Response headers |
+| ----------- | ----------------------------------------- | ---------------- |
+| **200**     | Successful request.                       | -                |
+| **401**     | The request requires user authentication. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

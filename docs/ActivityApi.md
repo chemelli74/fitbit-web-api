@@ -1,6 +1,6 @@
 # fitbit_web_api.ActivityApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                                                        | HTTP request                                                | Description                  |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------- | ---------------------------- |
@@ -22,7 +22,7 @@ All URIs are relative to *https://api.fitbit.com/*
 
 # **add_activities_log**
 
-> add_activities_log(activity_id, manual_calories, start_time, duration_millis, \_date, distance, activity_name=activity_name, distance_unit=distance_unit)
+> add_activities_log(activity_id, manual_calories, start_time, duration_millis, var_date, distance, activity_name=activity_name, distance_unit=distance_unit)
 
 Log Activity
 
@@ -30,33 +30,44 @@ The Log Activity endpoint creates log entry for an activity or user's private cu
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-activity_id = 56 # int | The ID of the activity, directory activity or intensity level activity.
-manual_calories = 56 # int | Calories burned that are manaully specified. Required with activityName must be provided.
-start_time = 'start_time_example' # str | Activity start time. Hours and minutes in the format HH:mm:ss.
-duration_millis = 56 # int | Duration in milliseconds.
-_date = '2013-10-20' # date | Log entry date in the format yyyy-MM-dd.
-distance = 56 # int | Distance is required for logging directory activity in the format X.XX and in the selected distanceUnit.
-activity_name = 'activity_name_example' # str | Custom activity name. Either activityId or activityName must be provided. (optional)
-distance_unit = 56 # int | Distance measurement unit. Steps units are available only for Walking (activityId=90013) and Running (activityId=90009) directory activities and their intensity levels. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Log Activity
-    api_instance.add_activities_log(activity_id, manual_calories, start_time, duration_millis, _date, distance, activity_name=activity_name, distance_unit=distance_unit)
-except ApiException as e:
-    print("Exception when calling ActivityApi->add_activities_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    activity_id = 56 # int | The ID of the activity, directory activity or intensity level activity.
+    manual_calories = 56 # int | Calories burned that are manaully specified. Required with activityName must be provided.
+    start_time = 'start_time_example' # str | Activity start time. Hours and minutes in the format HH:mm:ss.
+    duration_millis = 56 # int | Duration in milliseconds.
+    var_date = '2013-10-20' # date | Log entry date in the format yyyy-MM-dd.
+    distance = 56 # int | Distance is required for logging directory activity in the format X.XX and in the selected distanceUnit.
+    activity_name = 'activity_name_example' # str | Custom activity name. Either activityId or activityName must be provided. (optional)
+    distance_unit = 56 # int | Distance measurement unit. Steps units are available only for Walking (activityId=90013) and Running (activityId=90009) directory activities and their intensity levels. (optional)
+
+    try:
+        # Log Activity
+        await api_instance.add_activities_log(activity_id, manual_calories, start_time, duration_millis, var_date, distance, activity_name=activity_name, distance_unit=distance_unit)
+    except Exception as e:
+        print("Exception when calling ActivityApi->add_activities_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -67,7 +78,7 @@ except ApiException as e:
 | **manual_calories** | **int**  | Calories burned that are manaully specified. Required with activityName must be provided.                                                                                          |
 | **start_time**      | **str**  | Activity start time. Hours and minutes in the format HH:mm:ss.                                                                                                                     |
 | **duration_millis** | **int**  | Duration in milliseconds.                                                                                                                                                          |
-| **\_date**          | **date** | Log entry date in the format yyyy-MM-dd.                                                                                                                                           |
+| **var_date**        | **date** | Log entry date in the format yyyy-MM-dd.                                                                                                                                           |
 | **distance**        | **int**  | Distance is required for logging directory activity in the format X.XX and in the selected distanceUnit.                                                                           |
 | **activity_name**   | **str**  | Custom activity name. Either activityId or activityName must be provided.                                                                                                          | [optional] |
 | **distance_unit**   | **int**  | Distance measurement unit. Steps units are available only for Walking (activityId&#x3D;90013) and Running (activityId&#x3D;90009) directory activities and their intensity levels. | [optional] |
@@ -85,6 +96,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_favorite_activities**
@@ -97,26 +117,37 @@ Adds the activity with the given ID to user's list of favorite activities.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-activity_id = 'activity_id_example' # str | The encoded ID of the activity.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Add Favorite Activity
-    api_instance.add_favorite_activities(activity_id)
-except ApiException as e:
-    print("Exception when calling ActivityApi->add_favorite_activities: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    activity_id = 'activity_id_example' # str | The encoded ID of the activity.
+
+    try:
+        # Add Favorite Activity
+        await api_instance.add_favorite_activities(activity_id)
+    except Exception as e:
+        print("Exception when calling ActivityApi->add_favorite_activities: %s\n" % e)
 ```
 
 ### Parameters
@@ -138,6 +169,16 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **201**     | The request fulfilled and new resource being created.                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **add_update_activities_goals**
@@ -150,28 +191,39 @@ Updates a user's daily or weekly activity goals and returns a response using uni
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-period = 'period_example' # str | daily or weekly.
-type = 'type_example' # str | goal type
-value = 'value_example' # str | goal value
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Update Activity Goals
-    api_instance.add_update_activities_goals(period, type, value)
-except ApiException as e:
-    print("Exception when calling ActivityApi->add_update_activities_goals: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    period = 'period_example' # str | daily or weekly.
+    type = 'type_example' # str | goal type
+    value = 'value_example' # str | goal value
+
+    try:
+        # Update Activity Goals
+        await api_instance.add_update_activities_goals(period, type, value)
+    except Exception as e:
+        print("Exception when calling ActivityApi->add_update_activities_goals: %s\n" % e)
 ```
 
 ### Parameters
@@ -195,6 +247,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_activities_log**
@@ -207,26 +268,37 @@ Deletes a user's activity log entry with the given ID.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-activity_log_id = 56 # int | The id of the activity log entry.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Activity Log
-    api_instance.delete_activities_log(activity_log_id)
-except ApiException as e:
-    print("Exception when calling ActivityApi->delete_activities_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    activity_log_id = 56 # int | The id of the activity log entry.
+
+    try:
+        # Delete Activity Log
+        await api_instance.delete_activities_log(activity_log_id)
+    except Exception as e:
+        print("Exception when calling ActivityApi->delete_activities_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -248,6 +320,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_favorite_activities**
@@ -260,26 +340,37 @@ Removes the activity with the given ID from a user's list of favorite activities
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-activity_id = 'activity_id_example' # str | The ID of the activity to be removed.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Favorite Activity
-    api_instance.delete_favorite_activities(activity_id)
-except ApiException as e:
-    print("Exception when calling ActivityApi->delete_favorite_activities: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    activity_id = 'activity_id_example' # str | The ID of the activity to be removed.
+
+    try:
+        # Delete Favorite Activity
+        await api_instance.delete_favorite_activities(activity_id)
+    except Exception as e:
+        print("Exception when calling ActivityApi->delete_favorite_activities: %s\n" % e)
 ```
 
 ### Parameters
@@ -301,11 +392,19 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_activities_by_date**
 
-> get_activities_by_date(\_date)
+> get_activities_by_date(var_date)
 
 Get Activity Summary by Date
 
@@ -313,33 +412,44 @@ Retrieves a summary and list of a user's activities and activity log entries for
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format yyyy-MM-dd
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Activity Summary by Date
-    api_instance.get_activities_by_date(_date)
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_activities_by_date: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format yyyy-MM-dd
+
+    try:
+        # Get Activity Summary by Date
+        await api_instance.get_activities_by_date(var_date)
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_activities_by_date: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name       | Type     | Description                       | Notes |
-| ---------- | -------- | --------------------------------- | ----- |
-| **\_date** | **date** | The date in the format yyyy-MM-dd |
+| Name         | Type     | Description                       | Notes |
+| ------------ | -------- | --------------------------------- | ----- |
+| **var_date** | **date** | The date in the format yyyy-MM-dd |
 
 ### Return type
 
@@ -354,6 +464,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_activities_goals**
@@ -366,26 +485,37 @@ Retreives a user's current daily or weekly activity goals using measurement unit
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-period = 'period_example' # str | daily or weekly.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Activity Goals
-    api_instance.get_activities_goals(period)
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_activities_goals: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    period = 'period_example' # str | daily or weekly.
+
+    try:
+        # Get Activity Goals
+        await api_instance.get_activities_goals(period)
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_activities_goals: %s\n" % e)
 ```
 
 ### Parameters
@@ -407,6 +537,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_activities_log**
@@ -419,25 +558,36 @@ Updates a user's daily activity goals and returns a response using units in the 
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Lifetime Stats
-    api_instance.get_activities_log()
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_activities_log: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+
+    try:
+        # Get Lifetime Stats
+        await api_instance.get_activities_log()
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_activities_log: %s\n" % e)
 ```
 
 ### Parameters
@@ -457,6 +607,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_activities_log_list**
@@ -469,30 +628,41 @@ Retreives a list of user's activity log entries before or after a given day with
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-sort = 'sort_example' # str | The sort order of entries by date asc (ascending) or desc (descending).
-offset = 0 # int | The offset number of entries. (default to 0)
-limit = 56 # int | The maximum number of entries returned (maximum;100).
-before_date = '2013-10-20' # date | The date in the format yyyy-MM-ddTHH:mm:ss. Only yyyy-MM-dd is required. Either beforeDate or afterDate should be specified. (optional)
-after_date = '2013-10-20' # date | The date in the format yyyy-MM-ddTHH:mm:ss. (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Activity Log List
-    api_instance.get_activities_log_list(sort, offset, limit, before_date=before_date, after_date=after_date)
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_activities_log_list: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    sort = 'sort_example' # str | The sort order of entries by date asc (ascending) or desc (descending).
+    offset = 0 # int | The offset number of entries. (default to 0)
+    limit = 56 # int | The maximum number of entries returned (maximum;100).
+    before_date = '2013-10-20' # date | The date in the format yyyy-MM-ddTHH:mm:ss. Only yyyy-MM-dd is required. Either beforeDate or afterDate should be specified. (optional)
+    after_date = '2013-10-20' # date | The date in the format yyyy-MM-ddTHH:mm:ss. (optional)
+
+    try:
+        # Get Activity Log List
+        await api_instance.get_activities_log_list(sort, offset, limit, before_date=before_date, after_date=after_date)
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_activities_log_list: %s\n" % e)
 ```
 
 ### Parameters
@@ -518,6 +688,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_activities_tcx**
@@ -530,34 +709,45 @@ Retreives the details of a user's location and heart rate data during a logged e
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-log_id = 'log_id_example' # str | The activity's log ID.
-include_partial_tcx = true # bool | Include TCX points regardless of GPS data being present (optional)
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Activity TCX
-    api_instance.get_activities_tcx(log_id, include_partial_tcx=include_partial_tcx)
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_activities_tcx: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    log_id = 'log_id_example' # str | The activity's log ID.
+    include_partial_tcx = True # bool | Include TCX points regardless of GPS data being present (optional)
+
+    try:
+        # Get Activity TCX
+        await api_instance.get_activities_tcx(log_id, include_partial_tcx=include_partial_tcx)
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_activities_tcx: %s\n" % e)
 ```
 
 ### Parameters
 
 | Name                    | Type     | Description                                             | Notes      |
 | ----------------------- | -------- | ------------------------------------------------------- | ---------- |
-| **log_id**              | **str**  | The activity&#x27;s log ID.                             |
+| **log_id**              | **str**  | The activity&#39;s log ID.                              |
 | **include_partial_tcx** | **bool** | Include TCX points regardless of GPS data being present | [optional] |
 
 ### Return type
@@ -573,6 +763,16 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **403**     | The request was a valid request, but the server is refusing to respond to it.                                                                                                                        | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_activities_type_detail**
@@ -585,26 +785,37 @@ Returns the detail of a specific activity in the Fitbit activities database in t
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
-activity_id = 'activity_id_example' # str | The activity ID.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Activity Type
-    api_instance.get_activities_type_detail(activity_id)
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_activities_type_detail: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+    activity_id = 'activity_id_example' # str | The activity ID.
+
+    try:
+        # Get Activity Type
+        await api_instance.get_activities_type_detail(activity_id)
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_activities_type_detail: %s\n" % e)
 ```
 
 ### Parameters
@@ -626,6 +837,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_activities_types**
@@ -638,25 +858,36 @@ Retreives a tree of all valid Fitbit public activities from the activities catel
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Browse Activity Types
-    api_instance.get_activities_types()
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_activities_types: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+
+    try:
+        # Browse Activity Types
+        await api_instance.get_activities_types()
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_activities_types: %s\n" % e)
 ```
 
 ### Parameters
@@ -675,6 +906,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -688,25 +928,36 @@ Returns a list of a user's favorite activities.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Favorite Activities
-    api_instance.get_favorite_activities()
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_favorite_activities: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+
+    try:
+        # Get Favorite Activities
+        await api_instance.get_favorite_activities()
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_favorite_activities: %s\n" % e)
 ```
 
 ### Parameters
@@ -725,6 +976,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -738,25 +998,36 @@ Retreives a list of a user's frequent activities in the format requested using u
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Frequent Activities
-    api_instance.get_frequent_activities()
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_frequent_activities: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+
+    try:
+        # Get Frequent Activities
+        await api_instance.get_frequent_activities()
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_frequent_activities: %s\n" % e)
 ```
 
 ### Parameters
@@ -775,6 +1046,15 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -788,25 +1068,36 @@ Retreives a list of a user's recent activities types logged with some details of
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActivityApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Recent Activity Types
-    api_instance.get_recent_activities()
-except ApiException as e:
-    print("Exception when calling ActivityApi->get_recent_activities: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActivityApi(api_client)
+
+    try:
+        # Get Recent Activity Types
+        await api_instance.get_recent_activities()
+    except Exception as e:
+        print("Exception when calling ActivityApi->get_recent_activities: %s\n" % e)
 ```
 
 ### Parameters
@@ -825,5 +1116,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                                                                                                                                          | Response headers |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                                                                                                                                                | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.                                                                                                                              | -                |
+| **401**     | The request requires user authentication.                                                                                                                                                            | -                |
+| **409**     | Returned if the given user is already subscribed to this stream using a different subscription ID, OR if the given subscription ID is already used to identify a subscription to a different stream. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

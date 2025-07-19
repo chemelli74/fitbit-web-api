@@ -3,8 +3,8 @@
 # This script updates the Fitweb Web API schema with things that are incorrect
 # or missing.
 
-import pathlib
 import json
+import pathlib
 from typing import Any
 
 OPENAPI_DIR = pathlib.Path("openapi")

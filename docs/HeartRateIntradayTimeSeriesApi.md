@@ -1,6 +1,6 @@
 # fitbit_web_api.HeartRateIntradayTimeSeriesApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                                                                                                         | HTTP request                                                                                               | Description                         |
 | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ----------------------------------- |
@@ -11,7 +11,7 @@ All URIs are relative to *https://api.fitbit.com/*
 
 # **get_heart_by_date_intraday**
 
-> get_heart_by_date_intraday(\_date, detail_level)
+> get_heart_by_date_intraday(var_date, detail_level)
 
 Get Heart Rate Intraday Time Series
 
@@ -19,35 +19,46 @@ Returns the intraday time series for a given resource in the format requested. I
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
-detail_level = 'detail_level_example' # str | The number of data points to include either 1sec, 1min, 5min or 15min.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Heart Rate Intraday Time Series
-    api_instance.get_heart_by_date_intraday(_date, detail_level)
-except ApiException as e:
-    print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+    detail_level = '1min' # str | The number of data points to include either 1sec, 1min, 5min or 15min. (default to '1min')
+
+    try:
+        # Get Heart Rate Intraday Time Series
+        await api_instance.get_heart_by_date_intraday(var_date, detail_level)
+    except Exception as e:
+        print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_intraday: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name             | Type     | Description                                                            | Notes |
-| ---------------- | -------- | ---------------------------------------------------------------------- | ----- |
-| **\_date**       | **date** | The date in the format of yyyy-MM-dd or today.                         |
-| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. |
+| Name             | Type     | Description                                                            | Notes                       |
+| ---------------- | -------- | ---------------------------------------------------------------------- | --------------------------- |
+| **var_date**     | **date** | The date in the format of yyyy-MM-dd or today.                         |
+| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. | [default to &#39;1min&#39;] |
 
 ### Return type
 
@@ -61,12 +72,20 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_heart_by_date_range_intraday**
 
-> get_heart_by_date_range_intraday(\_date, end_date, detail_level)
+> get_heart_by_date_range_intraday(var_date, end_date, detail_level)
 
 Get Heart Rate Intraday Time Series
 
@@ -74,37 +93,48 @@ Returns the intraday time series for a given resource in the format requested. I
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
-end_date = '2013-10-20' # date | The end date in the format of yyyy-MM-dd or today.
-detail_level = 'detail_level_example' # str | The number of data points to include either 1sec, 1min, 5min or 15min.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Heart Rate Intraday Time Series
-    api_instance.get_heart_by_date_range_intraday(_date, end_date, detail_level)
-except ApiException as e:
-    print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_range_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+    end_date = '2013-10-20' # date | The end date in the format of yyyy-MM-dd or today.
+    detail_level = '1min' # str | The number of data points to include either 1sec, 1min, 5min or 15min. (default to '1min')
+
+    try:
+        # Get Heart Rate Intraday Time Series
+        await api_instance.get_heart_by_date_range_intraday(var_date, end_date, detail_level)
+    except Exception as e:
+        print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_range_intraday: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name             | Type     | Description                                                            | Notes |
-| ---------------- | -------- | ---------------------------------------------------------------------- | ----- |
-| **\_date**       | **date** | The date in the format of yyyy-MM-dd or today.                         |
+| Name             | Type     | Description                                                            | Notes                       |
+| ---------------- | -------- | ---------------------------------------------------------------------- | --------------------------- |
+| **var_date**     | **date** | The date in the format of yyyy-MM-dd or today.                         |
 | **end_date**     | **date** | The end date in the format of yyyy-MM-dd or today.                     |
-| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. |
+| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. | [default to &#39;1min&#39;] |
 
 ### Return type
 
@@ -118,12 +148,20 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_heart_by_date_range_timestamp_intraday**
 
-> get_heart_by_date_range_timestamp_intraday(\_date, end_date, detail_level, start_time, end_time)
+> get_heart_by_date_range_timestamp_intraday(var_date, end_date, detail_level, start_time, end_time)
 
 Get Heart Rate Intraday Time Series
 
@@ -131,39 +169,50 @@ Returns the intraday time series for a given resource in the format requested. I
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
-end_date = '2013-10-20' # date | The end date in the format of yyyy-MM-dd or today.
-detail_level = 'detail_level_example' # str | The number of data points to include either 1sec, 1min, 5min or 15min.
-start_time = 'start_time_example' # str | The start of the period in the format of HH:mm.
-end_time = 'end_time_example' # str | The end time of the period in the format of HH:mm.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Heart Rate Intraday Time Series
-    api_instance.get_heart_by_date_range_timestamp_intraday(_date, end_date, detail_level, start_time, end_time)
-except ApiException as e:
-    print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_range_timestamp_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+    end_date = '2013-10-20' # date | The end date in the format of yyyy-MM-dd or today.
+    detail_level = '1min' # str | The number of data points to include either 1sec, 1min, 5min or 15min. (default to '1min')
+    start_time = 'start_time_example' # str | The start of the period in the format of HH:mm.
+    end_time = 'end_time_example' # str | The end time of the period in the format of HH:mm.
+
+    try:
+        # Get Heart Rate Intraday Time Series
+        await api_instance.get_heart_by_date_range_timestamp_intraday(var_date, end_date, detail_level, start_time, end_time)
+    except Exception as e:
+        print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_range_timestamp_intraday: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name             | Type     | Description                                                            | Notes |
-| ---------------- | -------- | ---------------------------------------------------------------------- | ----- |
-| **\_date**       | **date** | The date in the format of yyyy-MM-dd or today.                         |
+| Name             | Type     | Description                                                            | Notes                       |
+| ---------------- | -------- | ---------------------------------------------------------------------- | --------------------------- |
+| **var_date**     | **date** | The date in the format of yyyy-MM-dd or today.                         |
 | **end_date**     | **date** | The end date in the format of yyyy-MM-dd or today.                     |
-| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. |
+| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. | [default to &#39;1min&#39;] |
 | **start_time**   | **str**  | The start of the period in the format of HH:mm.                        |
 | **end_time**     | **str**  | The end time of the period in the format of HH:mm.                     |
 
@@ -179,12 +228,20 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_heart_by_date_timestamp_intraday**
 
-> get_heart_by_date_timestamp_intraday(\_date, detail_level, start_time, end_time)
+> get_heart_by_date_timestamp_intraday(var_date, detail_level, start_time, end_time)
 
 Get Heart Rate Intraday Time Series
 
@@ -192,37 +249,48 @@ Returns the intraday time series for a given resource in the format requested. I
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
-detail_level = 'detail_level_example' # str | The number of data points to include either 1sec, 1min, 5min or 15min.
-start_time = 'start_time_example' # str | The start of the period in the format of HH:mm.
-end_time = 'end_time_example' # str | The end time of the period in the format of HH:mm.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Heart Rate Intraday Time Series
-    api_instance.get_heart_by_date_timestamp_intraday(_date, detail_level, start_time, end_time)
-except ApiException as e:
-    print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_timestamp_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.HeartRateIntradayTimeSeriesApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+    detail_level = '1min' # str | The number of data points to include either 1sec, 1min, 5min or 15min. (default to '1min')
+    start_time = 'start_time_example' # str | The start of the period in the format of HH:mm.
+    end_time = 'end_time_example' # str | The end time of the period in the format of HH:mm.
+
+    try:
+        # Get Heart Rate Intraday Time Series
+        await api_instance.get_heart_by_date_timestamp_intraday(var_date, detail_level, start_time, end_time)
+    except Exception as e:
+        print("Exception when calling HeartRateIntradayTimeSeriesApi->get_heart_by_date_timestamp_intraday: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name             | Type     | Description                                                            | Notes |
-| ---------------- | -------- | ---------------------------------------------------------------------- | ----- |
-| **\_date**       | **date** | The date in the format of yyyy-MM-dd or today.                         |
-| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. |
+| Name             | Type     | Description                                                            | Notes                       |
+| ---------------- | -------- | ---------------------------------------------------------------------- | --------------------------- |
+| **var_date**     | **date** | The date in the format of yyyy-MM-dd or today.                         |
+| **detail_level** | **str**  | The number of data points to include either 1sec, 1min, 5min or 15min. | [default to &#39;1min&#39;] |
 | **start_time**   | **str**  | The start of the period in the format of HH:mm.                        |
 | **end_time**     | **str**  | The end time of the period in the format of HH:mm.                     |
 
@@ -238,5 +306,13 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
