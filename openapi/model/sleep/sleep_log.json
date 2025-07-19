@@ -1,0 +1,136 @@
+{
+  "type": "object",
+  "properties": {
+    "dateOfSleep": {
+      "type": "string",
+      "format": "date",
+      "description": "The date the sleep log ended."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Length of the sleep in milliseconds."
+    },
+    "efficiency": {
+      "type": "number",
+      "description": "Calculated sleep efficiency score."
+    },
+    "endTime": {
+      "type": "string",
+      "description": "Time the sleep log ended."
+    },
+    "infoCode": {
+      "type": "integer",
+      "description": "An integer value representing the quality of data collected within the sleep log. 0 = Sufficient data, 1 = Insufficient heart rate data, 2 = Sleep period too short, 3 = Server-side issue."
+    },
+    "isMainSleep": {
+      "type": "boolean",
+      "description": "Boolean value indicating if this is the main sleep period."
+    },
+    "levels": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "dateTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp the user started in sleep level."
+              },
+              "level": {
+                "type": "string",
+                "description": "The sleep level the user entered."
+              },
+              "seconds": {
+                "type": "integer",
+                "description": "The length of time the user was in the sleep level in seconds."
+              }
+            }
+          }
+        },
+        "shortData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "dateTime": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Timestamp the user started in sleep level."
+              },
+              "level": {
+                "type": "string",
+                "description": "The sleep level the user entered."
+              },
+              "seconds": {
+                "type": "integer",
+                "description": "The length of time the user was in the sleep level in seconds."
+              }
+            }
+          },
+          "description": "Short data periods (3 minutes or less) for stages sleep logs."
+        },
+        "summary": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "integer",
+                "description": "Total number of times the user entered the sleep level."
+              },
+              "minutes": {
+                "type": "integer",
+                "description": "Total number of minutes the user appeared in the sleep level."
+              },
+              "thirtyDayAvgMinutes": {
+                "type": "integer",
+                "description": "The average sleep stage time over the past 30 days."
+              }
+            }
+          }
+        }
+      }
+    },
+    "logId": {
+      "type": "integer",
+      "description": "Sleep log ID."
+    },
+    "minutesAfterWakeup": {
+      "type": "integer",
+      "description": "The total number of minutes after the user woke up."
+    },
+    "minutesAsleep": {
+      "type": "integer",
+      "description": "The total number of minutes the user was asleep."
+    },
+    "minutesAwake": {
+      "type": "integer",
+      "description": "The total sum of wake minutes only."
+    },
+    "minutesToFallAsleep": {
+      "type": "integer",
+      "description": "The total number of minutes before the user falls asleep."
+    },
+    "logType": {
+      "type": "string",
+      "enum": ["auto_detected", "manual"],
+      "description": "The type of sleep in terms of how it was logged."
+    },
+    "startTime": {
+      "type": "string",
+      "description": "Time the sleep log begins."
+    },
+    "timeInBed": {
+      "type": "integer",
+      "description": "Total number of minutes the user was in bed."
+    },
+    "type": {
+      "type": "string",
+      "enum": ["classic", "stages"],
+      "description": "The type of sleep log."
+    }
+  }
+}

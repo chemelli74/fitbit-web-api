@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "retryDuration": {
+      "type": "integer",
+      "description": "The retry duration in milliseconds."
+    },
+    "state": {
+      "type": "string",
+      "enum": ["pending"],
+      "description": "The processing state of the sleep log."
+    }
+  }
+}
