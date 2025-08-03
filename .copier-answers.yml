@@ -12,9 +12,8 @@ initial_commit: true
 open_source_license: Apache Software License 2.0
 package_name: fitbit_web_api
 project_name: fitbit-web-api
-project_short_description: Swagger python Fitbit Web API
+project_short_description: Fitbit Web API
 project_slug: fitbit-web-api
 run_poetry_install: true
 setup_github: false
 setup_pre_commit: true
-

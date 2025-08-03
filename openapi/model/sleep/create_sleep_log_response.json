@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "sleep": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SleepLog"
+      },
+      "description": "Array of sleep log entries."
+    }
+  }
+}

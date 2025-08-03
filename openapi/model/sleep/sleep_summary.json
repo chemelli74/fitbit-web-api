@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "stages": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Summary of sleep stages with minutes for each stage."
+    },
+    "totalMinutesAsleep": {
+      "type": "integer",
+      "description": "Total number of minutes the user was asleep across all sleep records."
+    },
+    "totalSleepRecords": {
+      "type": "integer",
+      "description": "The number of sleep records within the sleep log."
+    },
+    "totalTimeInBed": {
+      "type": "integer",
+      "description": "Total number of minutes the user was in bed across all records."
+    }
+  }
+}

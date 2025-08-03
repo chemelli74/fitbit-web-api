@@ -1,6 +1,6 @@
 # fitbit_web_api.TemperatureApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                                                                       | HTTP request                                                | Description                                |
 | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------ |
@@ -11,7 +11,7 @@ All URIs are relative to *https://api.fitbit.com/*
 
 # **get_temp_core_summary_by_date**
 
-> get_temp_core_summary_by_date(\_date)
+> get_temp_core_summary_by_date(var_date)
 
 Get Temperature (Core) Summary by Date
 
@@ -19,33 +19,44 @@ Returns the Temperature (Core) data for a single date. Temperature (Core) data a
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.TemperatureApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Temperature (Core) Summary by Date
-    api_instance.get_temp_core_summary_by_date(_date)
-except ApiException as e:
-    print("Exception when calling TemperatureApi->get_temp_core_summary_by_date: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.TemperatureApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+
+    try:
+        # Get Temperature (Core) Summary by Date
+        await api_instance.get_temp_core_summary_by_date(var_date)
+    except Exception as e:
+        print("Exception when calling TemperatureApi->get_temp_core_summary_by_date: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name       | Type     | Description                                    | Notes |
-| ---------- | -------- | ---------------------------------------------- | ----- |
-| **\_date** | **date** | The date in the format of yyyy-MM-dd or today. |
+| Name         | Type     | Description                                    | Notes |
+| ------------ | -------- | ---------------------------------------------- | ----- |
+| **var_date** | **date** | The date in the format of yyyy-MM-dd or today. |
 
 ### Return type
 
@@ -59,6 +70,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -72,27 +91,38 @@ Returns Temperature (Core) data for a date range. Temperature (Core) data applie
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.TemperatureApi(fitbit_web_api.ApiClient(configuration))
-start_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
-end_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Temperature (Core) Summary by Interval
-    api_instance.get_temp_core_summary_by_interval(start_date, end_date)
-except ApiException as e:
-    print("Exception when calling TemperatureApi->get_temp_core_summary_by_interval: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.TemperatureApi(api_client)
+    start_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+    end_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+
+    try:
+        # Get Temperature (Core) Summary by Interval
+        await api_instance.get_temp_core_summary_by_interval(start_date, end_date)
+    except Exception as e:
+        print("Exception when calling TemperatureApi->get_temp_core_summary_by_interval: %s\n" % e)
 ```
 
 ### Parameters
@@ -114,6 +144,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -127,27 +165,38 @@ Returns Temperature (Skin) data for a date range. It only returns a value for da
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.TemperatureApi(fitbit_web_api.ApiClient(configuration))
-start_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
-end_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Temperature (Skin) Summary by Interval
-    api_instance.get_temp_skin_summary_by_interval(start_date, end_date)
-except ApiException as e:
-    print("Exception when calling TemperatureApi->get_temp_skin_summary_by_interval: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.TemperatureApi(api_client)
+    start_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+    end_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+
+    try:
+        # Get Temperature (Skin) Summary by Interval
+        await api_instance.get_temp_skin_summary_by_interval(start_date, end_date)
+    except Exception as e:
+        print("Exception when calling TemperatureApi->get_temp_skin_summary_by_interval: %s\n" % e)
 ```
 
 ### Parameters
@@ -170,11 +219,19 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_temp_skin_summary_date**
 
-> get_temp_skin_summary_date(\_date)
+> get_temp_skin_summary_date(var_date)
 
 Get Temperature (Skin) Summary by Date
 
@@ -182,33 +239,44 @@ Returns the Temperature (Skin) data for a single date. Temperature (Skin) data a
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.TemperatureApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Temperature (Skin) Summary by Date
-    api_instance.get_temp_skin_summary_date(_date)
-except ApiException as e:
-    print("Exception when calling TemperatureApi->get_temp_skin_summary_date: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.TemperatureApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format of yyyy-MM-dd or today.
+
+    try:
+        # Get Temperature (Skin) Summary by Date
+        await api_instance.get_temp_skin_summary_date(var_date)
+    except Exception as e:
+        print("Exception when calling TemperatureApi->get_temp_skin_summary_date: %s\n" % e)
 ```
 
 ### Parameters
 
-| Name       | Type     | Description                                    | Notes |
-| ---------- | -------- | ---------------------------------------------- | ----- |
-| **\_date** | **date** | The date in the format of yyyy-MM-dd or today. |
+| Name         | Type     | Description                                    | Notes |
+| ------------ | -------- | ---------------------------------------------- | ----- |
+| **var_date** | **date** | The date in the format of yyyy-MM-dd or today. |
 
 ### Return type
 
@@ -222,5 +290,13 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                       | Response headers |
+| ----------- | ----------------------------------------------------------------- | ---------------- |
+| **200**     | Successful request.                                               | -                |
+| **401**     | The request requires user authentication.                         | -                |
+| **403**     | The server understood the request, but is refusing to fulfill it. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

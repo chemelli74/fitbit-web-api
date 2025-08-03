@@ -1,0 +1,5 @@
+# Configuration file for OpenAPI Generator, used by script/generate-client.sh
+projectName: fitbit-web-api
+packageName: fitbit_web_api
+library: asyncio
+packageUrl: https://github.com/chemelli74/fitbit-web-api

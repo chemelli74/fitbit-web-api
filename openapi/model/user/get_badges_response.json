@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "badges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Badge"
+      }
+    }
+  }
+}

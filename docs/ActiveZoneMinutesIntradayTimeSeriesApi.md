@@ -1,6 +1,6 @@
 # fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                                                                                                           | HTTP request                                                                                                     | Description                  |
 | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------- |
@@ -11,7 +11,7 @@ All URIs are relative to *https://api.fitbit.com/*
 
 # **get_azmby_date_intraday**
 
-> get_azmby_date_intraday(\_date, detail_level)
+> get_azmby_date_intraday(var_date, detail_level)
 
 Get AZM Intraday by Date
 
@@ -19,34 +19,45 @@ Returns the active zone minutes intraday data for a 24 hour period by specifying
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
-detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Supported:** 1min | 5min | 15min
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get AZM Intraday by Date
-    api_instance.get_azmby_date_intraday(_date, detail_level)
-except ApiException as e:
-    print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_date_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
+    detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Supported:** 1min | 5min | 15min
+
+    try:
+        # Get AZM Intraday by Date
+        await api_instance.get_azmby_date_intraday(var_date, detail_level)
+    except Exception as e:
+        print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_date_intraday: %s\n" % e)
 ```
 
 ### Parameters
 
 | Name             | Type     | Description                                                     | Notes |
 | ---------------- | -------- | --------------------------------------------------------------- | ----- | ----- |
-| **\_date**       | **date** | The date in the format yyyy-MM-dd or today                      |
+| **var_date**     | **date** | The date in the format yyyy-MM-dd or today                      |
 | **detail_level** | **str**  | The detail for which data will be returned. **Supported:** 1min | 5min  | 15min |
 
 ### Return type
@@ -62,11 +73,20 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                        | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The API client is not authorized by Fitbit to access the resource requested. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_azmby_date_time_series_intraday**
 
-> get_azmby_date_time_series_intraday(\_date, detail_level, start_time, end_time)
+> get_azmby_date_time_series_intraday(var_date, detail_level, start_time, end_time)
 
 Get AZM Intraday by Date
 
@@ -74,36 +94,47 @@ Returns the active zone minutes intraday data for a 24 hour period by specifying
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
-detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Supported:** 1min | 5min | 15min
-start_time = 'start_time_example' # str | The start of the period in the format HH:mm.
-end_time = 'end_time_example' # str | The end of the period in the format HH:mm.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get AZM Intraday by Date
-    api_instance.get_azmby_date_time_series_intraday(_date, detail_level, start_time, end_time)
-except ApiException as e:
-    print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_date_time_series_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(api_client)
+    var_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
+    detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Supported:** 1min | 5min | 15min
+    start_time = 'start_time_example' # str | The start of the period in the format HH:mm.
+    end_time = 'end_time_example' # str | The end of the period in the format HH:mm.
+
+    try:
+        # Get AZM Intraday by Date
+        await api_instance.get_azmby_date_time_series_intraday(var_date, detail_level, start_time, end_time)
+    except Exception as e:
+        print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_date_time_series_intraday: %s\n" % e)
 ```
 
 ### Parameters
 
 | Name             | Type     | Description                                                     | Notes |
 | ---------------- | -------- | --------------------------------------------------------------- | ----- | ----- |
-| **\_date**       | **date** | The date in the format yyyy-MM-dd or today                      |
+| **var_date**     | **date** | The date in the format yyyy-MM-dd or today                      |
 | **detail_level** | **str**  | The detail for which data will be returned. **Supported:** 1min | 5min  | 15min |
 | **start_time**   | **str**  | The start of the period in the format HH:mm.                    |
 | **end_time**     | **str**  | The end of the period in the format HH:mm.                      |
@@ -121,6 +152,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                        | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The API client is not authorized by Fitbit to access the resource requested. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_azmby_interval_intraday**
@@ -133,28 +173,39 @@ Returns the active zone minutes intraday data for a 24 hour period by specifying
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-start_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
-end_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
-detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Support:** 1min | 5min | 15min
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get AZM Intraday by Interval
-    api_instance.get_azmby_interval_intraday(start_date, end_date, detail_level)
-except ApiException as e:
-    print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_interval_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(api_client)
+    start_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
+    end_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
+    detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Support:** 1min | 5min | 15min
+
+    try:
+        # Get AZM Intraday by Interval
+        await api_instance.get_azmby_interval_intraday(start_date, end_date, detail_level)
+    except Exception as e:
+        print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_interval_intraday: %s\n" % e)
 ```
 
 ### Parameters
@@ -178,6 +229,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                        | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The API client is not authorized by Fitbit to access the resource requested. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_azmby_interval_time_series_intraday**
@@ -190,30 +250,41 @@ Returns the active zone minutes intraday data for a 24 hour period by specifying
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(fitbit_web_api.ApiClient(configuration))
-start_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
-end_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
-detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Support:** 1min | 5min | 15min
-start_time = 'start_time_example' # str | The start of the period in the format HH:mm.
-end_time = 'end_time_example' # str | The end of the period in the format HH:mm.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get AZM Intraday by Interval
-    api_instance.get_azmby_interval_time_series_intraday(start_date, end_date, detail_level, start_time, end_time)
-except ApiException as e:
-    print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_interval_time_series_intraday: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.ActiveZoneMinutesIntradayTimeSeriesApi(api_client)
+    start_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
+    end_date = '2013-10-20' # date | The date in the format yyyy-MM-dd or today
+    detail_level = 'detail_level_example' # str | The detail for which data will be returned. **Support:** 1min | 5min | 15min
+    start_time = 'start_time_example' # str | The start of the period in the format HH:mm.
+    end_time = 'end_time_example' # str | The end of the period in the format HH:mm.
+
+    try:
+        # Get AZM Intraday by Interval
+        await api_instance.get_azmby_interval_time_series_intraday(start_date, end_date, detail_level, start_time, end_time)
+    except Exception as e:
+        print("Exception when calling ActiveZoneMinutesIntradayTimeSeriesApi->get_azmby_interval_time_series_intraday: %s\n" % e)
 ```
 
 ### Parameters
@@ -238,5 +309,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                  | Response headers |
+| ----------- | ---------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                        | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.      | -                |
+| **401**     | The request requires user authentication.                                    | -                |
+| **403**     | The API client is not authorized by Fitbit to access the resource requested. | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

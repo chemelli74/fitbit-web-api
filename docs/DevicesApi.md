@@ -1,6 +1,6 @@
 # fitbit_web_api.DevicesApi
 
-All URIs are relative to *https://api.fitbit.com/*
+All URIs are relative to *https://api.fitbit.com*
 
 | Method                                           | HTTP request                                                             | Description  |
 | ------------------------------------------------ | ------------------------------------------------------------------------ | ------------ |
@@ -20,30 +20,41 @@ Adds the alarm settings to a given ID for a given device.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.DevicesApi(fitbit_web_api.ApiClient(configuration))
-tracker_id = 56 # int | The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
-time = 'time_example' # str | Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00.
-enabled = true # bool | true or false. If false, alarm does not vibrate until enabled is set to true.
-recurring = 'recurring_example' # str | true or false. If false, the alarm is a single event.
-week_days = 'week_days_example' # str | Comma separated list of days of the week on which the alarm vibrates, e.g. MONDAY, TUESDAY.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Add Alarm
-    api_instance.add_alarms(tracker_id, time, enabled, recurring, week_days)
-except ApiException as e:
-    print("Exception when calling DevicesApi->add_alarms: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.DevicesApi(api_client)
+    tracker_id = 56 # int | The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
+    time = 'time_example' # str | Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00.
+    enabled = True # bool | true or false. If false, alarm does not vibrate until enabled is set to true.
+    recurring = 'recurring_example' # str | true or false. If false, the alarm is a single event.
+    week_days = 'week_days_example' # str | Comma separated list of days of the week on which the alarm vibrates, e.g. MONDAY, TUESDAY.
+
+    try:
+        # Add Alarm
+        await api_instance.add_alarms(tracker_id, time, enabled, recurring, week_days)
+    except Exception as e:
+        print("Exception when calling DevicesApi->add_alarms: %s\n" % e)
 ```
 
 ### Parameters
@@ -69,6 +80,15 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                                 | Response headers |
+| ----------- | --------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                       | -                |
+| **201**     | The request has been fulfilled and resulted in a new resouce being created. | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.     | -                |
+| **401**     | The request requires user authentication.                                   | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_alarms**
@@ -81,27 +101,38 @@ Deletes the user's device alarm entry with the given ID for a given device.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.DevicesApi(fitbit_web_api.ApiClient(configuration))
-tracker_id = 56 # int | The ID of the tracker whose alarms is managed. The tracker-id value is found via the Get Devices endpoint.
-alarm_id = 56 # int | The ID of the alarm to be updated. The alarm-id value is found via the Get Alarms endpoint.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Delete Alarm
-    api_instance.delete_alarms(tracker_id, alarm_id)
-except ApiException as e:
-    print("Exception when calling DevicesApi->delete_alarms: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.DevicesApi(api_client)
+    tracker_id = 56 # int | The ID of the tracker whose alarms is managed. The tracker-id value is found via the Get Devices endpoint.
+    alarm_id = 56 # int | The ID of the alarm to be updated. The alarm-id value is found via the Get Alarms endpoint.
+
+    try:
+        # Delete Alarm
+        await api_instance.delete_alarms(tracker_id, alarm_id)
+    except Exception as e:
+        print("Exception when calling DevicesApi->delete_alarms: %s\n" % e)
 ```
 
 ### Parameters
@@ -124,6 +155,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                             | Response headers |
+| ----------- | ------------------------------------------------------- | ---------------- |
+| **204**     | No Content. The request was successful.                 | -                |
+| **400**     | Bad Request. The request likely contained bad syntax.   | -                |
+| **401**     | Unauthorized. The request requires user authentication. | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_alarms**
@@ -136,26 +175,37 @@ Returns alarms for a device
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.DevicesApi(fitbit_web_api.ApiClient(configuration))
-tracker_id = 56 # int | The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Alarms
-    api_instance.get_alarms(tracker_id)
-except ApiException as e:
-    print("Exception when calling DevicesApi->get_alarms: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.DevicesApi(api_client)
+    tracker_id = 56 # int | The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
+
+    try:
+        # Get Alarms
+        await api_instance.get_alarms(tracker_id)
+    except Exception as e:
+        print("Exception when calling DevicesApi->get_alarms: %s\n" % e)
 ```
 
 ### Parameters
@@ -177,6 +227,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                   | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_devices**
@@ -189,25 +247,36 @@ Returns a list of the Fitbit devices connected to a user's account.
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.DevicesApi(fitbit_web_api.ApiClient(configuration))
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Get Devices
-    api_instance.get_devices()
-except ApiException as e:
-    print("Exception when calling DevicesApi->get_devices: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.DevicesApi(api_client)
+
+    try:
+        # Get Devices
+        await api_instance.get_devices()
+    except Exception as e:
+        print("Exception when calling DevicesApi->get_devices: %s\n" % e)
 ```
 
 ### Parameters
@@ -227,6 +296,14 @@ void (empty response body)
 - **Content-Type**: Not defined
 - **Accept**: Not defined
 
+### HTTP response details
+
+| Status code | Description                                                             | Response headers |
+| ----------- | ----------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                   | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified. | -                |
+| **401**     | The request requires user authentication.                               | -                |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_alarms**
@@ -239,33 +316,44 @@ Updates the alarm entry with a given ID for a given device. It also gets a respo
 
 ### Example
 
+- OAuth Authentication (oauth2):
+
 ```python
-from __future__ import print_function
-import time
 import fitbit_web_api
 from fitbit_web_api.rest import ApiException
 from pprint import pprint
 
-# Configure OAuth2 access token for authorization: oauth2
-configuration = fitbit_web_api.Configuration()
-configuration.access_token = 'YOUR_ACCESS_TOKEN'
+# Defining the host is optional and defaults to https://api.fitbit.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = fitbit_web_api.Configuration(
+    host = "https://api.fitbit.com"
+)
 
-# create an instance of the API class
-api_instance = fitbit_web_api.DevicesApi(fitbit_web_api.ApiClient(configuration))
-tracker_id = 56 # int | The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
-alarm_id = 56 # int | The ID of the alarm to be updated. The alarm-id value is found in the response of the Get Activity endpoint.
-time = 'time_example' # str | Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00.
-enabled = true # bool | true or false. If false, the alarm does not vibrate until enabled is set to true.
-recurring = 'recurring_example' # str | true or false. If false, the alarm is a single event.
-week_days = 'week_days_example' # str | Comma seperated list of days of the week on which the alarm vibrates, e.g. MONDAY, TUESDAY.
-snooze_length = 56 # int | Minutes between alarms.
-snooze_count = 56 # int | Maximum snooze count.
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-try:
-    # Update Alarm
-    api_instance.update_alarms(tracker_id, alarm_id, time, enabled, recurring, week_days, snooze_length, snooze_count)
-except ApiException as e:
-    print("Exception when calling DevicesApi->update_alarms: %s\n" % e)
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
+# Enter a context with an instance of the API client
+async with fitbit_web_api.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = fitbit_web_api.DevicesApi(api_client)
+    tracker_id = 56 # int | The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
+    alarm_id = 56 # int | The ID of the alarm to be updated. The alarm-id value is found in the response of the Get Activity endpoint.
+    time = 'time_example' # str | Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00.
+    enabled = True # bool | true or false. If false, the alarm does not vibrate until enabled is set to true.
+    recurring = 'recurring_example' # str | true or false. If false, the alarm is a single event.
+    week_days = 'week_days_example' # str | Comma seperated list of days of the week on which the alarm vibrates, e.g. MONDAY, TUESDAY.
+    snooze_length = 56 # int | Minutes between alarms.
+    snooze_count = 56 # int | Maximum snooze count.
+
+    try:
+        # Update Alarm
+        await api_instance.update_alarms(tracker_id, alarm_id, time, enabled, recurring, week_days, snooze_length, snooze_count)
+    except Exception as e:
+        print("Exception when calling DevicesApi->update_alarms: %s\n" % e)
 ```
 
 ### Parameters
@@ -293,5 +381,14 @@ void (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+### HTTP response details
+
+| Status code | Description                                                                 | Response headers |
+| ----------- | --------------------------------------------------------------------------- | ---------------- |
+| **200**     | A successful request.                                                       | -                |
+| **201**     | The request has been fulfilled and resulted in a new resouce being created. | -                |
+| **400**     | The request had bad syntax or was inherently impossible to be satified.     | -                |
+| **401**     | The request requires user authentication.                                   | -                |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
