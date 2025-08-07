@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.1 (2025-08-07)
+
+### Bug fixes
+
+- Require python3.11 and update script for generating client ([`50e3b22`](https://github.com/chemelli74/fitbit-web-api/commit/50e3b22ceb0729de2c0943bf0997e4f9eb5d14d1))
+
+
 ## v2.0.0 (2025-08-05)
 
 ### Build system
