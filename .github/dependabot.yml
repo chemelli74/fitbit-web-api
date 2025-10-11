@@ -11,5 +11,5 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 10
     ignore:
-      # Ignore updates for aiohttp as v3 needs asyncio tests
+      # Ignore updates for aiohttp as >= v3.10 needs asyncio tests
       - dependency-name: "aiohttp"
