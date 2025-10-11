@@ -17,3 +17,4 @@ project_slug: fitbit-web-api
 run_poetry_install: true
 setup_github: false
 setup_pre_commit: true
+

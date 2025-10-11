@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -14,10 +13,16 @@ import http.client as httplib
 import logging
 import sys
 from logging import FileHandler
-from typing import Any, ClassVar, Dict, List, Literal, Optional, TypedDict, Union
+from typing import (
+    Any,
+    ClassVar,
+    Literal,
+    NotRequired,
+    Self,
+    TypedDict,
+)
 
 import urllib3
-from typing_extensions import NotRequired, Self
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
     "multipleOf",
@@ -32,7 +37,7 @@ JSON_SCHEMA_VALIDATION_KEYWORDS = {
     "minItems",
 }
 
-ServerVariablesT = Dict[str, str]
+ServerVariablesT = dict[str, str]
 
 GenericAuthSetting = TypedDict(
     "GenericAuthSetting",
@@ -62,7 +67,7 @@ APIKeyAuthSetting = TypedDict(
         "type": Literal["api_key"],
         "in": str,
         "key": str,
-        "value": Optional[str],
+        "value": str | None,
     },
 )
 
@@ -73,7 +78,7 @@ BasicAuthSetting = TypedDict(
         "type": Literal["basic"],
         "in": Literal["header"],
         "key": Literal["Authorization"],
-        "value": Optional[str],
+        "value": str | None,
     },
 )
 
@@ -119,18 +124,17 @@ class AuthSettings(TypedDict, total=False):
 class HostSettingVariable(TypedDict):
     description: str
     default_value: str
-    enum_values: List[str]
+    enum_values: list[str]
 
 
 class HostSetting(TypedDict):
     url: str
     description: str
-    variables: NotRequired[Dict[str, HostSettingVariable]]
+    variables: NotRequired[dict[str, HostSettingVariable]]
 
 
 class Configuration:
-    """
-    This class contains various settings of the API client.
+    """This class contains various settings of the API client.
 
     :param host: Base url.
     :param ignore_operation_servers
@@ -165,26 +169,26 @@ class Configuration:
     :Example:
     """
 
-    _default: ClassVar[Optional[Self]] = None
+    _default: ClassVar[Self | None] = None
 
     def __init__(
         self,
-        host: Optional[str] = None,
-        api_key: Optional[Dict[str, str]] = None,
-        api_key_prefix: Optional[Dict[str, str]] = None,
-        username: Optional[str] = None,
-        password: Optional[str] = None,
-        access_token: Optional[str] = None,
-        server_index: Optional[int] = None,
-        server_variables: Optional[ServerVariablesT] = None,
-        server_operation_index: Optional[Dict[int, int]] = None,
-        server_operation_variables: Optional[Dict[int, ServerVariablesT]] = None,
+        host: str | None = None,
+        api_key: dict[str, str] | None = None,
+        api_key_prefix: dict[str, str] | None = None,
+        username: str | None = None,
+        password: str | None = None,
+        access_token: str | None = None,
+        server_index: int | None = None,
+        server_variables: ServerVariablesT | None = None,
+        server_operation_index: dict[int, int] | None = None,
+        server_operation_variables: dict[int, ServerVariablesT] | None = None,
         ignore_operation_servers: bool = False,
-        ssl_ca_cert: Optional[str] = None,
-        retries: Optional[int] = None,
-        ca_cert_data: Optional[Union[str, bytes]] = None,
+        ssl_ca_cert: str | None = None,
+        retries: int | None = None,
+        ca_cert_data: str | bytes | None = None,
         *,
-        debug: Optional[bool] = None,
+        debug: bool | None = None,
     ) -> None:
         """Constructor"""
         self._base_path = "https://api.fitbit.com" if host is None else host
@@ -238,7 +242,7 @@ class Configuration:
         self.logger_stream_handler = None
         """Log stream handler
         """
-        self.logger_file_handler: Optional[FileHandler] = None
+        self.logger_file_handler: FileHandler | None = None
         """Log file handler
         """
         self.logger_file = None
@@ -282,7 +286,7 @@ class Configuration:
            Default values is 100, None means no-limit.
         """
 
-        self.proxy: Optional[str] = None
+        self.proxy: str | None = None
         """Proxy URL
         """
         self.proxy_headers = None
@@ -309,7 +313,7 @@ class Configuration:
         """date format
         """
 
-    def __deepcopy__(self, memo: Dict[int, Any]) -> Self:
+    def __deepcopy__(self, memo: dict[int, Any]) -> Self:
         cls = self.__class__
         result = cls.__new__(cls)
         memo[id(self)] = result
@@ -327,9 +331,8 @@ class Configuration:
         object.__setattr__(self, name, value)
 
     @classmethod
-    def set_default(cls, default: Optional[Self]) -> None:
-        """
-        Set default instance of configuration.
+    def set_default(cls, default: Self | None) -> None:
+        """Set default instance of configuration.
 
         It stores default configuration, which can be
         returned by get_default_copy method.
@@ -340,8 +343,7 @@ class Configuration:
 
     @classmethod
     def get_default_copy(cls) -> Self:
-        """
-        Deprecated. Please use `get_default` instead.
+        """Deprecated. Please use `get_default` instead.
 
         Deprecated. Please use `get_default` instead.
 
@@ -351,8 +353,7 @@ class Configuration:
 
     @classmethod
     def get_default(cls) -> Self:
-        """
-        Return the default configuration.
+        """Return the default configuration.
 
         This method returns newly created, based on default constructor,
         object of Configuration class or returns a copy of default
@@ -365,9 +366,8 @@ class Configuration:
         return cls._default
 
     @property
-    def logger_file(self) -> Optional[str]:
-        """
-        The logger file.
+    def logger_file(self) -> str | None:
+        """The logger file.
 
         If the logger_file is None, then add stream handler and remove file
         handler. Otherwise, add file handler and remove stream handler.
@@ -378,9 +378,8 @@ class Configuration:
         return self.__logger_file
 
     @logger_file.setter
-    def logger_file(self, value: Optional[str]) -> None:
-        """
-        The logger file.
+    def logger_file(self, value: str | None) -> None:
+        """The logger file.
 
         If the logger_file is None, then add stream handler and remove file
         handler. Otherwise, add file handler and remove stream handler.
@@ -399,8 +398,7 @@ class Configuration:
 
     @property
     def debug(self) -> bool:
-        """
-        Debug status
+        """Debug status
 
         :param value: The debug status, True or False.
         :type: bool
@@ -409,8 +407,7 @@ class Configuration:
 
     @debug.setter
     def debug(self, value: bool) -> None:
-        """
-        Debug status
+        """Debug status
 
         :param value: The debug status, True or False.
         :type: bool
@@ -432,8 +429,7 @@ class Configuration:
 
     @property
     def logger_format(self) -> str:
-        """
-        The logger format.
+        """The logger format.
 
         The logger_formatter will be updated when sets logger_format.
 
@@ -444,8 +440,7 @@ class Configuration:
 
     @logger_format.setter
     def logger_format(self, value: str) -> None:
-        """
-        The logger format.
+        """The logger format.
 
         The logger_formatter will be updated when sets logger_format.
 
@@ -456,10 +451,9 @@ class Configuration:
         self.logger_formatter = logging.Formatter(self.__logger_format)
 
     def get_api_key_with_prefix(
-        self, identifier: str, alias: Optional[str] = None
-    ) -> Optional[str]:
-        """
-        Gets API key (with prefix if set).
+        self, identifier: str, alias: str | None = None
+    ) -> str | None:
+        """Gets API key (with prefix if set).
 
         :param identifier: The identifier of apiKey.
         :param alias: The alternative identifier of apiKey.
@@ -473,15 +467,13 @@ class Configuration:
         if key:
             prefix = self.api_key_prefix.get(identifier)
             if prefix:
-                return "%s %s" % (prefix, key)
-            else:
-                return key
+                return "{} {}".format(prefix, key)
+            return key
 
         return None
 
-    def get_basic_auth_token(self) -> Optional[str]:
-        """
-        Gets HTTP basic authentication header (string).
+    def get_basic_auth_token(self) -> str | None:
+        """Gets HTTP basic authentication header (string).
 
         :return: The token for basic HTTP authentication.
         """
@@ -496,8 +488,7 @@ class Configuration:
         )
 
     def auth_settings(self) -> AuthSettings:
-        """
-        Gets Auth Settings dict for api client.
+        """Gets Auth Settings dict for api client.
 
         :return: The Auth Settings information dict.
         """
@@ -512,8 +503,7 @@ class Configuration:
         return auth
 
     def to_debug_report(self) -> str:
-        """
-        Gets the essential information for debugging.
+        """Gets the essential information for debugging.
 
         :return: The report for debugging.
         """
@@ -525,9 +515,8 @@ class Configuration:
             "SDK Package Version: 1.0.0"
         )
 
-    def get_host_settings(self) -> List[HostSetting]:
-        """
-        Gets an array of host settings
+    def get_host_settings(self) -> list[HostSetting]:
+        """Gets an array of host settings
 
         :return: An array of host settings
         """
@@ -540,12 +529,11 @@ class Configuration:
 
     def get_host_from_settings(
         self,
-        index: Optional[int],
-        variables: Optional[ServerVariablesT] = None,
-        servers: Optional[List[HostSetting]] = None,
+        index: int | None,
+        variables: ServerVariablesT | None = None,
+        servers: list[HostSetting] | None = None,
     ) -> str:
-        """
-        Gets host URL based on the index and variables
+        """Gets host URL based on the index and variables
         :param index: array index of the host settings
         :param variables: hash of variable and the corresponding value
         :param servers: an array of host settings or None
@@ -573,8 +561,8 @@ class Configuration:
 
             if "enum_values" in variable and used_value not in variable["enum_values"]:
                 raise ValueError(
-                    "The variable `{0}` in the host URL has invalid value "
-                    "{1}. Must be {2}.".format(
+                    "The variable `{}` in the host URL has invalid value "
+                    "{}. Must be {}.".format(
                         variable_name, variables[variable_name], variable["enum_values"]
                     )
                 )

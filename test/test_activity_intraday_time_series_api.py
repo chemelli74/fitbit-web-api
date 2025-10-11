@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -26,38 +25,30 @@ class TestActivityIntradayTimeSeriesApi(unittest.IsolatedAsyncioTestCase):
         await self.api.api_client.close()
 
     async def test_get_activities_resource_by_date_intraday(self) -> None:
-        """
-        Test case for get_activities_resource_by_date_intraday
+        """Test case for get_activities_resource_by_date_intraday
 
         Get Intraday Time Series
         """
-        pass
 
     async def test_get_activities_resource_by_date_range_intraday(self) -> None:
-        """
-        Test case for get_activities_resource_by_date_range_intraday
+        """Test case for get_activities_resource_by_date_range_intraday
 
         Get Activity Intraday Time Series
         """
-        pass
 
     async def test_get_activities_resource_by_date_range_time_series_intraday(
         self,
     ) -> None:
-        """
-        Test case for get_activities_resource_by_date_range_time_series_intraday
+        """Test case for get_activities_resource_by_date_range_time_series_intraday
 
         Get Activity Intraday Time Series
         """
-        pass
 
     async def test_get_activities_resource_by_date_time_series_intraday(self) -> None:
-        """
-        Test case for get_activities_resource_by_date_time_series_intraday
+        """Test case for get_activities_resource_by_date_time_series_intraday
 
         Get Intraday Time Series
         """
-        pass
 
 
 if __name__ == "__main__":

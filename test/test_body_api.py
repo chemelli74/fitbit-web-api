@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -24,108 +23,82 @@ class TestBodyApi(unittest.IsolatedAsyncioTestCase):
         await self.api.api_client.close()
 
     async def test_add_body_fat_log(self) -> None:
-        """
-        Test case for add_body_fat_log
+        """Test case for add_body_fat_log
 
         Log Body Fat
         """
-        pass
 
     async def test_add_weight_log(self) -> None:
-        """
-        Test case for add_weight_log
+        """Test case for add_weight_log
 
         Log Weight
         """
-        pass
 
     async def test_delete_body_fat_log(self) -> None:
-        """
-        Test case for delete_body_fat_log
+        """Test case for delete_body_fat_log
 
         Delete Body Fat Log
         """
-        pass
 
     async def test_delete_weight_log(self) -> None:
-        """
-        Test case for delete_weight_log
+        """Test case for delete_weight_log
 
         Delete Weight Log
         """
-        pass
 
     async def test_get_body_fat_by_date(self) -> None:
-        """
-        Test case for get_body_fat_by_date
+        """Test case for get_body_fat_by_date
 
         Get Body Fat Logs
         """
-        pass
 
     async def test_get_body_fat_by_date_period(self) -> None:
-        """
-        Test case for get_body_fat_by_date_period
+        """Test case for get_body_fat_by_date_period
 
         Get Body Fat Logs
         """
-        pass
 
     async def test_get_body_fat_by_date_range(self) -> None:
-        """
-        Test case for get_body_fat_by_date_range
+        """Test case for get_body_fat_by_date_range
 
         Get Body Fat Logs
         """
-        pass
 
     async def test_get_body_goals(self) -> None:
-        """
-        Test case for get_body_goals
+        """Test case for get_body_goals
 
         Get Body Goals
         """
-        pass
 
     async def test_get_weight_by_date(self) -> None:
-        """
-        Test case for get_weight_by_date
+        """Test case for get_weight_by_date
 
         Get Weight Logs
         """
-        pass
 
     async def test_get_weight_by_date_period(self) -> None:
-        """
-        Test case for get_weight_by_date_period
+        """Test case for get_weight_by_date_period
 
         Get Body Fat Logs
         """
-        pass
 
     async def test_get_weight_by_date_range(self) -> None:
-        """
-        Test case for get_weight_by_date_range
+        """Test case for get_weight_by_date_range
 
         Get Body Fat Logs
         """
-        pass
 
     async def test_update_body_fat_goal(self) -> None:
-        """
-        Test case for update_body_fat_goal
+        """Test case for update_body_fat_goal
 
         Update Body Fat Goal
         """
-        pass
 
     async def test_update_weight_goal(self) -> None:
-        """
-        Test case for update_weight_goal
+        """Test case for update_weight_goal
 
         Update Weight Goal
         """
-        pass
 
 
 if __name__ == "__main__":

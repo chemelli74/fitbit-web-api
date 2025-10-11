@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -24,60 +23,46 @@ class TestSleepApi(unittest.IsolatedAsyncioTestCase):
         await self.api.api_client.close()
 
     async def test_add_sleep(self) -> None:
-        """
-        Test case for add_sleep
+        """Test case for add_sleep
 
         Log Sleep
         """
-        pass
 
     async def test_delete_sleep(self) -> None:
-        """
-        Test case for delete_sleep
+        """Test case for delete_sleep
 
         Delete Sleep Log
         """
-        pass
 
     async def test_get_sleep_by_date(self) -> None:
-        """
-        Test case for get_sleep_by_date
+        """Test case for get_sleep_by_date
 
         Get Sleep Log
         """
-        pass
 
     async def test_get_sleep_by_date_range(self) -> None:
-        """
-        Test case for get_sleep_by_date_range
+        """Test case for get_sleep_by_date_range
 
         Get Sleep Logs by Date Range
         """
-        pass
 
     async def test_get_sleep_goal(self) -> None:
-        """
-        Test case for get_sleep_goal
+        """Test case for get_sleep_goal
 
         Get Sleep Goal
         """
-        pass
 
     async def test_get_sleep_list(self) -> None:
-        """
-        Test case for get_sleep_list
+        """Test case for get_sleep_list
 
         Get Sleep Logs List
         """
-        pass
 
     async def test_update_sleep_goal(self) -> None:
-        """
-        Test case for update_sleep_goal
+        """Test case for update_sleep_goal
 
         Update Sleep Goal
         """
-        pass
 
 
 if __name__ == "__main__":

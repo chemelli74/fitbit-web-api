@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -24,28 +23,22 @@ class TestSubscriptionsApi(unittest.IsolatedAsyncioTestCase):
         await self.api.api_client.close()
 
     async def test_add_subscriptions(self) -> None:
-        """
-        Test case for add_subscriptions
+        """Test case for add_subscriptions
 
         Add a Subscription
         """
-        pass
 
     async def test_delete_subscriptions(self) -> None:
-        """
-        Test case for delete_subscriptions
+        """Test case for delete_subscriptions
 
         Delete a Subscription
         """
-        pass
 
     async def test_get_subscriptions_list(self) -> None:
-        """
-        Test case for get_subscriptions_list
+        """Test case for get_subscriptions_list
 
         Get a List of Subscriptions
         """
-        pass
 
 
 if __name__ == "__main__":

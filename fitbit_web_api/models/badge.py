@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -15,52 +14,47 @@ import json
 import pprint
 import re  # noqa: F401
 from datetime import datetime
-from typing import Any, ClassVar, Dict, List, Optional, Set
+from typing import Any, ClassVar, Self
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing_extensions import Self
 
 
 class Badge(BaseModel):
-    """
-    Badge
-    """
+    """Badge"""
 
-    badge_gradient_end_color: Optional[StrictStr] = Field(
+    badge_gradient_end_color: StrictStr | None = Field(
         default=None, alias="badgeGradientEndColor"
     )
-    badge_gradient_start_color: Optional[StrictStr] = Field(
+    badge_gradient_start_color: StrictStr | None = Field(
         default=None, alias="badgeGradientStartColor"
     )
-    badge_type: Optional[StrictStr] = Field(default=None, alias="badgeType")
-    category: Optional[StrictStr] = None
-    cheers: Optional[List[Dict[str, Any]]] = None
-    date_time: Optional[datetime] = Field(default=None, alias="dateTime")
-    description: Optional[StrictStr] = None
-    earned_message: Optional[StrictStr] = Field(default=None, alias="earnedMessage")
-    encoded_id: Optional[StrictStr] = Field(default=None, alias="encodedId")
-    image100px: Optional[StrictStr] = None
-    image125px: Optional[StrictStr] = None
-    image300px: Optional[StrictStr] = None
-    image50px: Optional[StrictStr] = None
-    image75px: Optional[StrictStr] = None
-    marketing_description: Optional[StrictStr] = Field(
+    badge_type: StrictStr | None = Field(default=None, alias="badgeType")
+    category: StrictStr | None = None
+    cheers: list[dict[str, Any]] | None = None
+    date_time: datetime | None = Field(default=None, alias="dateTime")
+    description: StrictStr | None = None
+    earned_message: StrictStr | None = Field(default=None, alias="earnedMessage")
+    encoded_id: StrictStr | None = Field(default=None, alias="encodedId")
+    image100px: StrictStr | None = None
+    image125px: StrictStr | None = None
+    image300px: StrictStr | None = None
+    image50px: StrictStr | None = None
+    image75px: StrictStr | None = None
+    marketing_description: StrictStr | None = Field(
         default=None, alias="marketingDescription"
     )
-    mobile_description: Optional[StrictStr] = Field(
+    mobile_description: StrictStr | None = Field(
         default=None, alias="mobileDescription"
     )
-    name: Optional[StrictStr] = None
-    share_image640px: Optional[StrictStr] = Field(default=None, alias="shareImage640px")
-    share_text: Optional[StrictStr] = Field(default=None, alias="shareText")
-    short_description: Optional[StrictStr] = Field(
-        default=None, alias="shortDescription"
-    )
-    short_name: Optional[StrictStr] = Field(default=None, alias="shortName")
-    times_achieved: Optional[StrictInt] = Field(default=None, alias="timesAchieved")
-    value: Optional[StrictInt] = None
-    unit: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = [
+    name: StrictStr | None = None
+    share_image640px: StrictStr | None = Field(default=None, alias="shareImage640px")
+    share_text: StrictStr | None = Field(default=None, alias="shareText")
+    short_description: StrictStr | None = Field(default=None, alias="shortDescription")
+    short_name: StrictStr | None = Field(default=None, alias="shortName")
+    times_achieved: StrictInt | None = Field(default=None, alias="timesAchieved")
+    value: StrictInt | None = None
+    unit: StrictStr | None = None
+    __properties: ClassVar[list[str]] = [
         "badgeGradientEndColor",
         "badgeGradientStartColor",
         "badgeType",
@@ -103,13 +97,12 @@ class Badge(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(cls, json_str: str) -> Self | None:
         """Create an instance of Badge from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self) -> Dict[str, Any]:
-        """
-        Return the dictionary representation of the model using alias.
+    def to_dict(self) -> dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
 
         This has the following differences from calling pydantic's
         `self.model_dump(by_alias=True)`:
@@ -118,7 +111,7 @@ class Badge(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: set[str] = set()
 
         _dict = self.model_dump(
             by_alias=True,
@@ -128,7 +121,7 @@ class Badge(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(cls, obj: dict[str, Any] | None) -> Self | None:
         """Create an instance of Badge from a dict"""
         if obj is None:
             return None
