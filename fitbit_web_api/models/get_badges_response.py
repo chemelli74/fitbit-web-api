@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -14,21 +13,18 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from typing import Any, ClassVar, Dict, List, Optional, Set
+from typing import Any, ClassVar, Self
 
 from pydantic import BaseModel, ConfigDict
-from typing_extensions import Self
 
 from fitbit_web_api.models.badge import Badge
 
 
 class GetBadgesResponse(BaseModel):
-    """
-    GetBadgesResponse
-    """
+    """GetBadgesResponse"""
 
-    badges: Optional[List[Badge]] = None
-    __properties: ClassVar[List[str]] = ["badges"]
+    badges: list[Badge] | None = None
+    __properties: ClassVar[list[str]] = ["badges"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -46,13 +42,12 @@ class GetBadgesResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(cls, json_str: str) -> Self | None:
         """Create an instance of GetBadgesResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self) -> Dict[str, Any]:
-        """
-        Return the dictionary representation of the model using alias.
+    def to_dict(self) -> dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
 
         This has the following differences from calling pydantic's
         `self.model_dump(by_alias=True)`:
@@ -61,7 +56,7 @@ class GetBadgesResponse(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: set[str] = set()
 
         _dict = self.model_dump(
             by_alias=True,
@@ -78,7 +73,7 @@ class GetBadgesResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(cls, obj: dict[str, Any] | None) -> Self | None:
         """Create an instance of GetBadgesResponse from a dict"""
         if obj is None:
             return None

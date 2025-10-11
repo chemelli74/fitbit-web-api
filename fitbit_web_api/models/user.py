@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -15,7 +14,7 @@ import json
 import pprint
 import re  # noqa: F401
 from datetime import date
-from typing import Any, ClassVar, Dict, List, Optional, Set, Union
+from typing import Any, ClassVar, Self
 
 from pydantic import (
     BaseModel,
@@ -26,89 +25,86 @@ from pydantic import (
     StrictInt,
     StrictStr,
 )
-from typing_extensions import Self
 
 from fitbit_web_api.models.badge import Badge
 from fitbit_web_api.models.user_features import UserFeatures
 
 
 class User(BaseModel):
-    """
-    User
-    """
+    """User"""
 
-    age: Optional[StrictInt] = None
-    ambassador: Optional[StrictBool] = None
-    auto_stride_enabled: Optional[StrictBool] = Field(
+    age: StrictInt | None = None
+    ambassador: StrictBool | None = None
+    auto_stride_enabled: StrictBool | None = Field(
         default=None, alias="autoStrideEnabled"
     )
-    avatar: Optional[StrictStr] = None
-    avatar150: Optional[StrictStr] = None
-    avatar640: Optional[StrictStr] = None
-    average_daily_steps: Optional[StrictInt] = Field(
+    avatar: StrictStr | None = None
+    avatar150: StrictStr | None = None
+    avatar640: StrictStr | None = None
+    average_daily_steps: StrictInt | None = Field(
         default=None, alias="averageDailySteps"
     )
-    challenges_beta: Optional[StrictBool] = Field(default=None, alias="challengesBeta")
-    clock_time_display_format: Optional[StrictStr] = Field(
+    challenges_beta: StrictBool | None = Field(default=None, alias="challengesBeta")
+    clock_time_display_format: StrictStr | None = Field(
         default=None, alias="clockTimeDisplayFormat"
     )
-    corporate: Optional[StrictBool] = None
-    corporate_admin: Optional[StrictBool] = Field(default=None, alias="corporateAdmin")
-    country: Optional[StrictStr] = None
-    date_of_birth: Optional[date] = Field(default=None, alias="dateOfBirth")
-    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    display_name_setting: Optional[StrictStr] = Field(
+    corporate: StrictBool | None = None
+    corporate_admin: StrictBool | None = Field(default=None, alias="corporateAdmin")
+    country: StrictStr | None = None
+    date_of_birth: date | None = Field(default=None, alias="dateOfBirth")
+    display_name: StrictStr | None = Field(default=None, alias="displayName")
+    display_name_setting: StrictStr | None = Field(
         default=None, alias="displayNameSetting"
     )
-    distance_unit: Optional[StrictStr] = Field(default=None, alias="distanceUnit")
-    encoded_id: Optional[StrictStr] = Field(default=None, alias="encodedId")
-    features: Optional[UserFeatures] = None
-    first_name: Optional[StrictStr] = Field(default=None, alias="firstName")
-    foods_locale: Optional[StrictStr] = Field(default=None, alias="foodsLocale")
-    full_name: Optional[StrictStr] = Field(default=None, alias="fullName")
-    gender: Optional[StrictStr] = None
-    glucose_unit: Optional[StrictStr] = Field(default=None, alias="glucoseUnit")
-    height: Optional[Union[StrictFloat, StrictInt]] = None
-    height_unit: Optional[StrictStr] = Field(default=None, alias="heightUnit")
-    is_bug_report_enabled: Optional[StrictBool] = Field(
+    distance_unit: StrictStr | None = Field(default=None, alias="distanceUnit")
+    encoded_id: StrictStr | None = Field(default=None, alias="encodedId")
+    features: UserFeatures | None = None
+    first_name: StrictStr | None = Field(default=None, alias="firstName")
+    foods_locale: StrictStr | None = Field(default=None, alias="foodsLocale")
+    full_name: StrictStr | None = Field(default=None, alias="fullName")
+    gender: StrictStr | None = None
+    glucose_unit: StrictStr | None = Field(default=None, alias="glucoseUnit")
+    height: StrictFloat | StrictInt | None = None
+    height_unit: StrictStr | None = Field(default=None, alias="heightUnit")
+    is_bug_report_enabled: StrictBool | None = Field(
         default=None, alias="isBugReportEnabled"
     )
-    is_child: Optional[StrictBool] = Field(default=None, alias="isChild")
-    is_coach: Optional[StrictBool] = Field(default=None, alias="isCoach")
-    language_locale: Optional[StrictStr] = Field(default=None, alias="languageLocale")
-    last_name: Optional[StrictStr] = Field(default=None, alias="lastName")
-    legal_terms_accept_required: Optional[StrictBool] = Field(
+    is_child: StrictBool | None = Field(default=None, alias="isChild")
+    is_coach: StrictBool | None = Field(default=None, alias="isCoach")
+    language_locale: StrictStr | None = Field(default=None, alias="languageLocale")
+    last_name: StrictStr | None = Field(default=None, alias="lastName")
+    legal_terms_accept_required: StrictBool | None = Field(
         default=None, alias="legalTermsAcceptRequired"
     )
-    locale: Optional[StrictStr] = None
-    member_since: Optional[date] = Field(default=None, alias="memberSince")
-    mfa_enabled: Optional[StrictBool] = Field(default=None, alias="mfaEnabled")
-    offset_from_utc_millis: Optional[StrictInt] = Field(
+    locale: StrictStr | None = None
+    member_since: date | None = Field(default=None, alias="memberSince")
+    mfa_enabled: StrictBool | None = Field(default=None, alias="mfaEnabled")
+    offset_from_utc_millis: StrictInt | None = Field(
         default=None, alias="offsetFromUTCMillis"
     )
-    sdk_developer: Optional[StrictBool] = Field(default=None, alias="sdkDeveloper")
-    sleep_tracking: Optional[StrictStr] = Field(default=None, alias="sleepTracking")
-    start_day_of_week: Optional[StrictStr] = Field(default=None, alias="startDayOfWeek")
-    stride_length_running: Optional[Union[StrictFloat, StrictInt]] = Field(
+    sdk_developer: StrictBool | None = Field(default=None, alias="sdkDeveloper")
+    sleep_tracking: StrictStr | None = Field(default=None, alias="sleepTracking")
+    start_day_of_week: StrictStr | None = Field(default=None, alias="startDayOfWeek")
+    stride_length_running: StrictFloat | StrictInt | None = Field(
         default=None, alias="strideLengthRunning"
     )
-    stride_length_running_type: Optional[StrictStr] = Field(
+    stride_length_running_type: StrictStr | None = Field(
         default=None, alias="strideLengthRunningType"
     )
-    stride_length_walking: Optional[Union[StrictFloat, StrictInt]] = Field(
+    stride_length_walking: StrictFloat | StrictInt | None = Field(
         default=None, alias="strideLengthWalking"
     )
-    stride_length_walking_type: Optional[StrictStr] = Field(
+    stride_length_walking_type: StrictStr | None = Field(
         default=None, alias="strideLengthWalkingType"
     )
-    swim_unit: Optional[StrictStr] = Field(default=None, alias="swimUnit")
-    timezone: Optional[StrictStr] = None
-    top_badges: Optional[List[Badge]] = Field(default=None, alias="topBadges")
-    water_unit: Optional[StrictStr] = Field(default=None, alias="waterUnit")
-    water_unit_name: Optional[StrictStr] = Field(default=None, alias="waterUnitName")
-    weight: Optional[Union[StrictFloat, StrictInt]] = None
-    weight_unit: Optional[StrictStr] = Field(default=None, alias="weightUnit")
-    __properties: ClassVar[List[str]] = [
+    swim_unit: StrictStr | None = Field(default=None, alias="swimUnit")
+    timezone: StrictStr | None = None
+    top_badges: list[Badge] | None = Field(default=None, alias="topBadges")
+    water_unit: StrictStr | None = Field(default=None, alias="waterUnit")
+    water_unit_name: StrictStr | None = Field(default=None, alias="waterUnitName")
+    weight: StrictFloat | StrictInt | None = None
+    weight_unit: StrictStr | None = Field(default=None, alias="weightUnit")
+    __properties: ClassVar[list[str]] = [
         "age",
         "ambassador",
         "autoStrideEnabled",
@@ -176,13 +172,12 @@ class User(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(cls, json_str: str) -> Self | None:
         """Create an instance of User from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self) -> Dict[str, Any]:
-        """
-        Return the dictionary representation of the model using alias.
+    def to_dict(self) -> dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
 
         This has the following differences from calling pydantic's
         `self.model_dump(by_alias=True)`:
@@ -191,7 +186,7 @@ class User(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: set[str] = set()
 
         _dict = self.model_dump(
             by_alias=True,
@@ -211,7 +206,7 @@ class User(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(cls, obj: dict[str, Any] | None) -> Self | None:
         """Create an instance of User from a dict"""
         if obj is None:
             return None

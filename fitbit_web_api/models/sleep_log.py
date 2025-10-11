@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -15,7 +14,7 @@ import json
 import pprint
 import re  # noqa: F401
 from datetime import date
-from typing import Any, ClassVar, Dict, List, Optional, Set, Union
+from typing import Any, ClassVar, Self
 
 from pydantic import (
     BaseModel,
@@ -27,79 +26,74 @@ from pydantic import (
     StrictStr,
     field_validator,
 )
-from typing_extensions import Self
 
 from fitbit_web_api.models.sleep_log_levels import SleepLogLevels
 
 
 class SleepLog(BaseModel):
-    """
-    SleepLog
-    """
+    """SleepLog"""
 
-    date_of_sleep: Optional[date] = Field(
+    date_of_sleep: date | None = Field(
         default=None, description="The date the sleep log ended.", alias="dateOfSleep"
     )
-    duration: Optional[StrictInt] = Field(
+    duration: StrictInt | None = Field(
         default=None, description="Length of the sleep in milliseconds."
     )
-    efficiency: Optional[Union[StrictFloat, StrictInt]] = Field(
+    efficiency: StrictFloat | StrictInt | None = Field(
         default=None, description="Calculated sleep efficiency score."
     )
-    end_time: Optional[StrictStr] = Field(
+    end_time: StrictStr | None = Field(
         default=None, description="Time the sleep log ended.", alias="endTime"
     )
-    info_code: Optional[StrictInt] = Field(
+    info_code: StrictInt | None = Field(
         default=None,
         description="An integer value representing the quality of data collected within the sleep log. 0 = Sufficient data, 1 = Insufficient heart rate data, 2 = Sleep period too short, 3 = Server-side issue.",
         alias="infoCode",
     )
-    is_main_sleep: Optional[StrictBool] = Field(
+    is_main_sleep: StrictBool | None = Field(
         default=None,
         description="Boolean value indicating if this is the main sleep period.",
         alias="isMainSleep",
     )
-    levels: Optional[SleepLogLevels] = None
-    log_id: Optional[StrictInt] = Field(
+    levels: SleepLogLevels | None = None
+    log_id: StrictInt | None = Field(
         default=None, description="Sleep log ID.", alias="logId"
     )
-    minutes_after_wakeup: Optional[StrictInt] = Field(
+    minutes_after_wakeup: StrictInt | None = Field(
         default=None,
         description="The total number of minutes after the user woke up.",
         alias="minutesAfterWakeup",
     )
-    minutes_asleep: Optional[StrictInt] = Field(
+    minutes_asleep: StrictInt | None = Field(
         default=None,
         description="The total number of minutes the user was asleep.",
         alias="minutesAsleep",
     )
-    minutes_awake: Optional[StrictInt] = Field(
+    minutes_awake: StrictInt | None = Field(
         default=None,
         description="The total sum of wake minutes only.",
         alias="minutesAwake",
     )
-    minutes_to_fall_asleep: Optional[StrictInt] = Field(
+    minutes_to_fall_asleep: StrictInt | None = Field(
         default=None,
         description="The total number of minutes before the user falls asleep.",
         alias="minutesToFallAsleep",
     )
-    log_type: Optional[StrictStr] = Field(
+    log_type: StrictStr | None = Field(
         default=None,
         description="The type of sleep in terms of how it was logged.",
         alias="logType",
     )
-    start_time: Optional[StrictStr] = Field(
+    start_time: StrictStr | None = Field(
         default=None, description="Time the sleep log begins.", alias="startTime"
     )
-    time_in_bed: Optional[StrictInt] = Field(
+    time_in_bed: StrictInt | None = Field(
         default=None,
         description="Total number of minutes the user was in bed.",
         alias="timeInBed",
     )
-    type: Optional[StrictStr] = Field(
-        default=None, description="The type of sleep log."
-    )
-    __properties: ClassVar[List[str]] = [
+    type: StrictStr | None = Field(default=None, description="The type of sleep log.")
+    __properties: ClassVar[list[str]] = [
         "dateOfSleep",
         "duration",
         "efficiency",
@@ -124,7 +118,7 @@ class SleepLog(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["auto_detected", "manual"]):
+        if value not in {"auto_detected", "manual"}:
             raise ValueError("must be one of enum values ('auto_detected', 'manual')")
         return value
 
@@ -134,7 +128,7 @@ class SleepLog(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["classic", "stages"]):
+        if value not in {"classic", "stages"}:
             raise ValueError("must be one of enum values ('classic', 'stages')")
         return value
 
@@ -154,13 +148,12 @@ class SleepLog(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> Optional[Self]:
+    def from_json(cls, json_str: str) -> Self | None:
         """Create an instance of SleepLog from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
-    def to_dict(self) -> Dict[str, Any]:
-        """
-        Return the dictionary representation of the model using alias.
+    def to_dict(self) -> dict[str, Any]:
+        """Return the dictionary representation of the model using alias.
 
         This has the following differences from calling pydantic's
         `self.model_dump(by_alias=True)`:
@@ -169,7 +162,7 @@ class SleepLog(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         """
-        excluded_fields: Set[str] = set([])
+        excluded_fields: set[str] = set()
 
         _dict = self.model_dump(
             by_alias=True,
@@ -182,7 +175,7 @@ class SleepLog(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
+    def from_dict(cls, obj: dict[str, Any] | None) -> Self | None:
         """Create an instance of SleepLog from a dict"""
         if obj is None:
             return None

@@ -1,5 +1,4 @@
-"""
-Fitbit Web API Explorer
+"""Fitbit Web API Explorer
 
 Fitbit provides a Web API for accessing data from Fitbit activity trackers, Aria scale, and manually entered logs. Anyone can develop an application to access and modify a Fitbit user's data on their behalf, so long as it complies with Fitbit Platform Terms of Service. These Swagger UI docs do not currently support making Fitbit API requests directly. In order to make a request, construct a request for the appropriate endpoint using this documentation, and then add an Authorization header to each request with an access token obtained using the steps outlined here: https://dev.fitbit.com/build/reference/web-api/developer-guide/authorization/.
 
@@ -13,7 +12,6 @@ import io
 import json
 import re
 import ssl
-from typing import Optional, Union
 
 import aiohttp
 import aiohttp_retry
@@ -26,7 +24,6 @@ ALLOW_RETRY_METHODS = frozenset({"DELETE", "GET", "HEAD", "OPTIONS", "PUT", "TRA
 
 
 class RESTResponse(io.IOBase):
-
     def __init__(self, resp) -> None:
         self.response = resp
         self.status = resp.status
@@ -48,9 +45,7 @@ class RESTResponse(io.IOBase):
 
 
 class RESTClientObject:
-
     def __init__(self, configuration) -> None:
-
         # maxsize is number of requests to host that are allowed in parallel
         self.maxsize = configuration.connection_pool_maxsize
 
@@ -72,8 +67,8 @@ class RESTClientObject:
 
         self.retries = configuration.retries
 
-        self.pool_manager: Optional[aiohttp.ClientSession] = None
-        self.retry_client: Optional[aiohttp_retry.RetryClient] = None
+        self.pool_manager: aiohttp.ClientSession | None = None
+        self.retry_client: aiohttp_retry.RetryClient | None = None
 
     async def close(self) -> None:
         if self.pool_manager:
@@ -90,8 +85,7 @@ class RESTClientObject:
         post_params=None,
         _request_timeout=None,
     ):
-        """
-        Execute request
+        """Execute request
 
         :param method: http request method
         :param url: http request url
@@ -166,7 +160,7 @@ class RESTClientObject:
                          declared content type."""
                 raise ApiException(status=0, reason=msg)
 
-        pool_manager: Union[aiohttp.ClientSession, aiohttp_retry.RetryClient]
+        pool_manager: aiohttp.ClientSession | aiohttp_retry.RetryClient
 
         # https pool manager
         if self.pool_manager is None:
